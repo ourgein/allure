@@ -1,0 +1,1212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Products — ALLURE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Pastel Color Palette */
+      --bg: #F8F7F5;
+      --bg-white: #FFFFFF;
+      --text: #1A1A1A;
+      --text-light: #666666;
+      --pastel-lavender: #E8D5E3;
+      --pastel-blue: #D4E4F0;
+      --pastel-pink: #F5D7D7;
+      --pastel-rose: #F0D4D9;
+      --pastel-peach: #F5E0D4;
+      --pastel-yellow: #F5E8D4;
+      --pastel-purple: #E4D5E8;
+      --pastel-sky: #D4E8F0;
+      --accent-blue: #6B9BC4;
+      --accent-purple: #8B6FA8;
+      --accent-rose: #C97A8E;
+      --accent-primary: #8B6FA8;
+      --accent-secondary: #C97A8E;
+      --border: #E5E5E5;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body{
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, .serif{
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Header */
+    .products-header{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: clamp(16px, 3vw, 24px) clamp(20px, 4vw, 32px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
+      background: var(--bg-white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo{
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 3.5vw, 28px);
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo img{
+      height: clamp(32.96px, 5.15vw, 49.44px); /* %3 increase */
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo-icon{
+      width: clamp(32px, 5vw, 40px);
+      height: clamp(32px, 5vw, 40px);
+      background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-blue));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(16px, 2.5vw, 20px);
+      font-weight: 700;
+    }
+
+    .header-back{
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .header-back:hover{
+      color: var(--accent-primary);
+    }
+
+    /* Main Content */
+    .products-container{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: clamp(40px, 7vw, 60px) clamp(20px, 4vw, 32px);
+    }
+
+    .page-header{
+      text-align: center;
+      margin-bottom: clamp(40px, 7vw, 64px);
+    }
+
+    .page-header h1{
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .page-header p{
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Category Filter */
+    .category-filter{
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: clamp(32px, 5vw, 48px);
+    }
+
+    .category-btn{
+      padding: clamp(10px, 2vw, 14px) clamp(20px, 3vw, 28px);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-white);
+      color: var(--text);
+      font-size: clamp(14px, 2vw, 16px);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .category-btn:hover{
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    .category-btn.active{
+      background: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+
+    /* Products Grid */
+    .products-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+      gap: clamp(24px, 4vw, 32px);
+    }
+
+    .product-card{
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all 0.3s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover{
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent-primary);
+    }
+
+    .product-image{
+      width: 100%;
+      height: clamp(200px, 30vw, 280px);
+      background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-image img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .product-image .product-icon{
+      display: none;
+    }
+
+    .product-badge{
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--accent-primary);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      z-index: 2;
+    }
+
+    .product-favorite{
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.9);
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      z-index: 2;
+    }
+
+    .product-favorite:hover{
+      background: white;
+      transform: scale(1.1);
+    }
+
+    .product-favorite.active{
+      background: var(--pastel-rose);
+    }
+
+    .product-info{
+      padding: clamp(20px, 3vw, 24px);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-category{
+      font-size: clamp(11px, 1.6vw, 12px);
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .product-name{
+      font-size: clamp(18px, 3vw, 22px);
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .product-desc{
+      font-size: clamp(13px, 2vw, 14px);
+      color: var(--text-light);
+      margin-bottom: 16px;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .product-ingredients{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .ingredient-tag{
+      background: var(--pastel-purple);
+      color: var(--text);
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .product-actions{
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .product-btn{
+      flex: 1;
+      padding: 10px 16px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-white);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .product-btn:hover{
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    .product-btn.primary{
+      background: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+
+    .product-btn.primary:hover{
+      background: var(--accent-secondary);
+      border-color: var(--accent-secondary);
+    }
+
+    /* Product Modal */
+    .product-modal{
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .product-modal.active{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content{
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-header{
+      padding: 32px 32px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .modal-close{
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: var(--bg);
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover{
+      background: var(--border);
+    }
+
+    .modal-body{
+      padding: 0 32px 32px;
+    }
+
+    .modal-product-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 32px;
+    }
+
+    .modal-product-image{
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-blue));
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-product-image img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .modal-product-image .product-icon{
+      display: none;
+    }
+
+    .modal-product-info h2{
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .modal-section{
+      margin-bottom: 32px;
+    }
+
+    .modal-section h3{
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .ingredients-list{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .ingredient-card{
+      background: var(--bg);
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .ingredient-card h4{
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .ingredient-card p{
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .ingredient-percentage{
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-top: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .modal-product-grid{
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px){
+      .products-grid{
+        grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+        gap: 20px;
+      }
+
+      .category-filter{
+        gap: 8px;
+      }
+
+      .category-btn{
+        padding: 10px 16px;
+        font-size: 13px;
+        flex: 1;
+        min-width: calc(33.333% - 6px);
+      }
+
+      .product-actions{
+        flex-direction: column;
+      }
+
+      .modal-content{
+        margin: 10px;
+        max-height: 95vh;
+      }
+
+      .modal-header,
+      .modal-body{
+        padding: 24px 20px;
+      }
+    }
+
+    @media (max-width: 480px){
+      .products-grid{
+        grid-template-columns: 1fr;
+      }
+
+      .category-btn{
+        min-width: calc(50% - 4px);
+      }
+
+      .product-image{
+        height: 200px;
+      }
+
+      .modal-product-image{
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <div class="products-header">
+    <a href="index.html" class="header-back">
+      <span>←</span> Back
+    </a>
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="ALLURE LABS" />
+      <span>ALLURE</span>
+    </a>
+    <div></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="products-container">
+    <div class="page-header">
+      <h1>Our Products</h1>
+      <p>Gentle, balanced, evidence-led products for your skin, hair, and beauty routine</p>
+    </div>
+
+    <!-- Category Filter -->
+    <div class="category-filter">
+      <button class="category-btn active" data-category="all" onclick="filterProducts('all')">All Products</button>
+      <button class="category-btn" data-category="skincare" onclick="filterProducts('skincare')">Skincare</button>
+      <button class="category-btn" data-category="cosmetics" onclick="filterProducts('cosmetics')">Cosmetics</button>
+      <button class="category-btn" data-category="hair" onclick="filterProducts('hair')">Hair Care</button>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid" id="productsGrid">
+      <!-- Products will be dynamically added -->
+    </div>
+  </div>
+
+  <!-- Product Modal -->
+  <div class="product-modal" id="productModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <div class="product-category" id="modalCategory">Category</div>
+          <h2 id="modalProductName">Product Name</h2>
+        </div>
+        <button class="modal-close" id="closeModal">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-product-grid">
+          <div class="modal-product-image" id="modalProductImage">
+          </div>
+          <div class="modal-product-info">
+            <p id="modalProductDesc" style="color: var(--text-light); margin-bottom: 24px;"></p>
+            
+            <div class="modal-section">
+              <h3>Why This Works</h3>
+              <ul id="modalBenefits" style="list-style: none; padding: 0;">
+                <!-- Benefits will be added here -->
+              </ul>
+            </div>
+
+            <div class="modal-section">
+              <h3>How to Use</h3>
+              <p id="modalUsage" style="color: var(--text-light);"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3>Evidence-led Ingredients</h3>
+          <div class="ingredients-list" id="modalIngredients">
+            <!-- Ingredients will be added here -->
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; margin-top: 32px;">
+          <button class="product-btn primary" onclick="openDesigner()">Design Package</button>
+          <button class="product-btn" onclick="addToFavorites()">Add to Favorites</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="background: var(--bg); padding: clamp(40px, 7vw, 60px) clamp(20px, 4vw, 32px); text-align: center; border-top: 1px solid var(--border); margin-top: 100px;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <p style="font-size: clamp(13px, 2vw, 14px); color: var(--text-light); line-height: 1.6; margin-bottom: 12px;">
+        <strong>ALLURE provides educational suggestions, not medical diagnosis.</strong>
+      </p>
+      <p style="font-size: clamp(12px, 1.8vw, 13px); color: var(--text-light); line-height: 1.6;">
+        If you have persistent irritation, acne, or other skin concerns, please consult a dermatologist.
+      </p>
+      
+      <div style="margin: 32px 0 24px;">
+        <a href="https://www.instagram.com/allurexlabs/" target="_blank" rel="noopener noreferrer" 
+           style="display: inline-flex; align-items: center; gap: 10px; color: var(--accent-primary); text-decoration: none; font-size: clamp(15px, 2vw, 16px); font-weight: 600; transition: all 0.2s; padding: 12px 24px; border: 2px solid var(--accent-primary); border-radius: var(--radius); background: var(--bg-white);">
+          <span style="font-size: 20px;">📷</span>
+          <span>Follow @allurexlabs</span>
+        </a>
+      </div>
+      
+      <p style="font-size: clamp(11px, 1.6vw, 12px); color: var(--text-light); margin-top: 24px;">
+        © 2024 ALLURE. Inclusive • Evidence-led • Responsible
+      </p>
+    </div>
+  </footer>
+
+<script>
+  // Product Data
+  const allProducts = {
+    // Skincare
+    skincare: {
+      cleanser: {
+        name: "Gentle Gel Cleanser",
+        desc: "Barrier-friendly cleanser that removes impurities without stripping. Balanced for your skin type.",
+        category: "Skincare",
+        subcategory: "Cleanser",
+        benefits: [
+          "Gentle, balanced cleansing",
+          "Barrier support",
+          "Calm, comfortable feel",
+          "Evidence-led formula"
+        ],
+        usage: "Apply to damp skin, massage gently in circular motions, then rinse with lukewarm water. Use morning and evening.",
+        ingredients: [
+          { name: "Niacinamide", percentage: "4%", benefit: "Balances sebum production and minimizes pores" },
+          { name: "Ceramides", percentage: "2%", benefit: "Strengthens skin barrier" },
+          { name: "Glycerin", percentage: "5%", benefit: "Provides hydration" },
+          { name: "Hyaluronic Acid", percentage: "1%", benefit: "Locks in moisture" }
+        ],
+        icon: "🧴",
+        image: "Cleanser.png"
+      },
+      serum: {
+        name: "Balancing Serum",
+        desc: "Evidence-led active serum chosen for your main goal. Gentle, targeted support.",
+        category: "Skincare",
+        subcategory: "Serum",
+        benefits: [
+          "Targets your specific goal",
+          "Barrier-friendly actives",
+          "Calm, balanced results",
+          "Science-backed formula"
+        ],
+        usage: "Apply 2-3 drops to clean skin after cleansing, before moisturizer. Use morning and/or evening.",
+        ingredients: [
+          { name: "Niacinamide", percentage: "10%", benefit: "Controls oil and minimizes pores" },
+          { name: "Zinc PCA", percentage: "1%", benefit: "Reduces inflammation" },
+          { name: "Allantoin", percentage: "0.5%", benefit: "Soothes and calms skin" }
+        ],
+        icon: "💧",
+        image: "Serum.png"
+      },
+      moisturizer: {
+        name: "Barrier Support Moisturizer",
+        desc: "Gentle moisturizer that locks in moisture and supports your skin barrier. Comfort and relief.",
+        category: "Skincare",
+        subcategory: "Moisturizer",
+        benefits: [
+          "Barrier support",
+          "Long-lasting comfort",
+          "Relief for sensitive skin",
+          "Inclusive formula"
+        ],
+        usage: "Apply a dime-sized amount to face and neck after serum. Use morning and evening.",
+        ingredients: [
+          { name: "Ceramides", percentage: "3%", benefit: "Repairs skin barrier" },
+          { name: "Cholesterol", percentage: "1%", benefit: "Supports barrier function" },
+          { name: "Fatty Acids", percentage: "2%", benefit: "Restores lipid balance" },
+          { name: "Squalane", percentage: "5%", benefit: "Provides lightweight hydration" }
+        ],
+        icon: "🧴",
+        image: "Moisturizer.png"
+      },
+      sunscreen: {
+        name: "Daily Protection SPF",
+        desc: "Responsible, mineral-based protection. Barrier-friendly and climate-adjusted for your needs.",
+        category: "Skincare",
+        subcategory: "Sunscreen",
+        benefits: [
+          "Broad spectrum protection",
+          "Responsible formula",
+          "Barrier-friendly",
+          "Climate-adjusted"
+        ],
+        usage: "Apply liberally 15 minutes before sun exposure. Reapply every 2 hours or after swimming/sweating.",
+        ingredients: [
+          { name: "Zinc Oxide", percentage: "20%", benefit: "Physical UV blocker" },
+          { name: "Titanium Dioxide", percentage: "5%", benefit: "Additional UV protection" },
+          { name: "Niacinamide", percentage: "2%", benefit: "Antioxidant support" }
+        ],
+        icon: "☀️",
+        image: "Sunscreen.png"
+      },
+      toner: {
+        name: "Balancing Toner",
+        desc: "Gentle, pH-balancing toner that preps your skin. Calm, refreshing feel.",
+        category: "Skincare",
+        subcategory: "Toner",
+        benefits: [
+          "pH balance",
+          "Gentle prep",
+          "Calm, refreshing",
+          "Barrier-friendly"
+        ],
+        usage: "Apply with a cotton pad or pat into skin after cleansing, before serum.",
+        ingredients: [
+          { name: "Hyaluronic Acid", percentage: "2%", benefit: "Hydration boost" },
+          { name: "Niacinamide", percentage: "3%", benefit: "Balances skin" },
+          { name: "Rose Water", percentage: "5%", benefit: "Soothes and refreshes" }
+        ],
+        icon: "💧",
+        image: "Toner.png"
+      },
+      "eye-cream": {
+        name: "Eye Cream",
+        desc: "Gentle eye area treatment. Barrier support for delicate skin.",
+        category: "Skincare",
+        subcategory: "Eye Care",
+        benefits: [
+          "Barrier support",
+          "Gentle formula",
+          "Delicate skin care",
+          "Comfort and relief"
+        ],
+        usage: "Apply a small amount around the eye area, morning and evening.",
+        ingredients: [
+          { name: "Peptides", percentage: "2%", benefit: "Supports skin elasticity" },
+          { name: "Caffeine", percentage: "1%", benefit: "Reduces puffiness" },
+          { name: "Ceramides", percentage: "2%", benefit: "Barrier support" }
+        ],
+        icon: "👁️",
+        image: "Eye Cream.png"
+      }
+    },
+    // Cosmetics
+    cosmetics: {
+      foundation: {
+        name: "Inclusive Foundation",
+        desc: "Buildable coverage that matches your skin tone. Barrier-friendly, inclusive shades.",
+        category: "Cosmetics",
+        subcategory: "Foundation",
+        benefits: [
+          "Inclusive shade range",
+          "Barrier-friendly",
+          "Buildable coverage",
+          "Natural finish"
+        ],
+        usage: "Apply with brush, sponge, or fingers. Blend outward for even coverage.",
+        ingredients: [
+          { name: "Hyaluronic Acid", percentage: "1%", benefit: "Hydration" },
+          { name: "Niacinamide", percentage: "2%", benefit: "Skin balance" },
+          { name: "Titanium Dioxide", percentage: "3%", benefit: "SPF protection" }
+        ],
+        icon: "💄",
+        image: "Foundation.png"
+      },
+      concealer: {
+        name: "Gentle Concealer",
+        desc: "Coverage that doesn't compromise your barrier. Calm, comfortable wear.",
+        category: "Cosmetics",
+        subcategory: "Concealer",
+        benefits: [
+          "Barrier-friendly",
+          "Full coverage",
+          "Comfortable wear",
+          "Long-lasting"
+        ],
+        usage: "Apply to areas needing coverage. Blend with finger or brush.",
+        ingredients: [
+          { name: "Ceramides", percentage: "1%", benefit: "Barrier support" },
+          { name: "Glycerin", percentage: "3%", benefit: "Hydration" }
+        ],
+        icon: "✨",
+        image: "Concealer.png"
+      },
+      lipstick: {
+        name: "Comfort Lipstick",
+        desc: "Moisturizing lip color. Comfortable, long-wearing, barrier-friendly.",
+        category: "Cosmetics",
+        subcategory: "Lipstick",
+        benefits: [
+          "Moisturizing",
+          "Long-wearing",
+          "Comfortable",
+          "Inclusive shades"
+        ],
+        usage: "Apply directly to lips or use a brush for precision.",
+        ingredients: [
+          { name: "Shea Butter", percentage: "5%", benefit: "Moisture" },
+          { name: "Vitamin E", percentage: "1%", benefit: "Protection" }
+        ],
+        icon: "💋",
+        image: "Lipstick.png"
+      },
+      mascara: {
+        name: "Gentle Mascara",
+        desc: "Lengthening and volumizing without irritation. Safe for sensitive eyes.",
+        category: "Cosmetics",
+        subcategory: "Mascara",
+        benefits: [
+          "Sensitive eye safe",
+          "Lengthening",
+          "Volumizing",
+          "Easy removal"
+        ],
+        usage: "Apply from root to tip in upward strokes.",
+        ingredients: [
+          { name: "Beeswax", percentage: "3%", benefit: "Conditioning" },
+          { name: "Panthenol", percentage: "1%", benefit: "Lash care" }
+        ],
+        icon: "👁️",
+        image: "Mascara.png"
+      },
+      blush: {
+        name: "Natural Blush",
+        desc: "Buildable color for a natural glow. Barrier-friendly formula.",
+        category: "Cosmetics",
+        subcategory: "Blush",
+        benefits: [
+          "Natural finish",
+          "Buildable",
+          "Barrier-friendly",
+          "Long-lasting"
+        ],
+        usage: "Apply to apples of cheeks and blend upward.",
+        ingredients: [
+          { name: "Jojoba Oil", percentage: "2%", benefit: "Smooth application" },
+          { name: "Vitamin E", percentage: "0.5%", benefit: "Skin care" }
+        ],
+        icon: "🌸",
+        image: "Blush.png"
+      },
+      eyeshadow: {
+        name: "Eyeshadow Palette",
+        desc: "Versatile shades for every look. Gentle, blendable, inclusive.",
+        category: "Cosmetics",
+        subcategory: "Eyeshadow",
+        benefits: [
+          "Versatile shades",
+          "Blendable",
+          "Long-wearing",
+          "Inclusive range"
+        ],
+        usage: "Apply with brush, blend for desired intensity.",
+        ingredients: [
+          { name: "Mica", percentage: "Base", benefit: "Smooth texture" },
+          { name: "Talc", percentage: "Base", benefit: "Blendability" }
+        ],
+        icon: "🎨",
+        image: "Eyeshadow.png"
+      }
+    },
+    // Hair Care
+    hair: {
+      shampoo: {
+        name: "Gentle Shampoo",
+        desc: "Cleansing without stripping. Balanced for all hair types.",
+        category: "Hair Care",
+        subcategory: "Shampoo",
+        benefits: [
+          "Gentle cleansing",
+          "All hair types",
+          "Balanced formula",
+          "Barrier-friendly"
+        ],
+        usage: "Wet hair, apply, massage, rinse thoroughly.",
+        ingredients: [
+          { name: "Coconut Oil", percentage: "3%", benefit: "Moisture" },
+          { name: "Biotin", percentage: "1%", benefit: "Hair strength" },
+          { name: "Keratin", percentage: "2%", benefit: "Repair" }
+        ],
+        icon: "🧴",
+        image: "Shampoo.png"
+      },
+      conditioner: {
+        name: "Nourishing Conditioner",
+        desc: "Moisture and detangling. Gentle, responsible formula.",
+        category: "Hair Care",
+        subcategory: "Conditioner",
+        benefits: [
+          "Deep moisture",
+          "Detangling",
+          "Smooth finish",
+          "Responsible formula"
+        ],
+        usage: "Apply to mid-lengths and ends. Leave 2-3 minutes, rinse.",
+        ingredients: [
+          { name: "Argan Oil", percentage: "4%", benefit: "Moisture" },
+          { name: "Shea Butter", percentage: "3%", benefit: "Conditioning" },
+          { name: "Panthenol", percentage: "2%", benefit: "Strength" }
+        ],
+        icon: "💧",
+        image: "Conditioner.png"
+      },
+      "hair-mask": {
+        name: "Repair Hair Mask",
+        desc: "Weekly treatment for damaged hair. Restore, repair, renew.",
+        category: "Hair Care",
+        subcategory: "Hair Mask",
+        benefits: [
+          "Deep repair",
+          "Restoration",
+          "Weekly treatment",
+          "Barrier support"
+        ],
+        usage: "Apply to clean, damp hair. Leave 10-15 minutes, rinse.",
+        ingredients: [
+          { name: "Keratin", percentage: "5%", benefit: "Repair" },
+          { name: "Olive Oil", percentage: "6%", benefit: "Nourishment" },
+          { name: "Honey", percentage: "3%", benefit: "Moisture" }
+        ],
+        icon: "🧴",
+        image: "Hair_Mask .png"
+      },
+      "hair-serum": {
+        name: "Smoothing Hair Serum",
+        desc: "Frizz control and shine. Lightweight, non-greasy.",
+        category: "Hair Care",
+        subcategory: "Hair Serum",
+        benefits: [
+          "Frizz control",
+          "Shine boost",
+          "Lightweight",
+          "Non-greasy"
+        ],
+        usage: "Apply to damp or dry hair, focusing on ends.",
+        ingredients: [
+          { name: "Argan Oil", percentage: "5%", benefit: "Smoothing" },
+          { name: "Silicone", percentage: "2%", benefit: "Shine" }
+        ],
+        icon: "✨",
+        image: "Hair_Serum.png"
+      },
+      "hair-oil": {
+        name: "Nourishing Hair Oil",
+        desc: "Intensive treatment oil. Repair and shine for all hair types.",
+        category: "Hair Care",
+        subcategory: "Hair Oil",
+        benefits: [
+          "Intensive treatment",
+          "Repair and shine",
+          "All hair types",
+          "Responsible formula"
+        ],
+        usage: "Apply to ends or all over for deep treatment. Leave in or rinse.",
+        ingredients: [
+          { name: "Jojoba Oil", percentage: "Base", benefit: "Moisture" },
+          { name: "Coconut Oil", percentage: "Base", benefit: "Penetration" },
+          { name: "Vitamin E", percentage: "2%", benefit: "Protection" }
+        ],
+        icon: "🫒",
+        image: "Hair_Oil.png"
+      }
+    }
+  };
+
+  const $ = (sel) => document.querySelector(sel);
+  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+  let currentCategory = "all";
+  let favorites = new Set();
+
+  // Load favorites
+  function loadFavorites(){
+    const saved = localStorage.getItem("allure_favorites");
+    if(saved){
+      try{
+        favorites = new Set(JSON.parse(saved));
+      } catch(e){}
+    }
+  }
+
+  function saveFavorites(){
+    localStorage.setItem("allure_favorites", JSON.stringify(Array.from(favorites)));
+  }
+
+  // Filter Products
+  function filterProducts(category){
+    currentCategory = category;
+    
+    // Update buttons
+    $$(".category-btn").forEach(btn => {
+      btn.classList.remove("active");
+      if(btn.dataset.category === category){
+        btn.classList.add("active");
+      }
+    });
+
+    renderProducts();
+  }
+
+  // Render Products
+  function renderProducts(){
+    const grid = $("#productsGrid");
+    let productsToShow = [];
+
+    if(currentCategory === "all"){
+      for(const categoryKey in allProducts){
+        const categoryProducts = allProducts[categoryKey];
+        for(const productKey in categoryProducts){
+          const product = categoryProducts[productKey];
+          product._key = `${categoryKey}-${productKey}`;
+          productsToShow.push(product);
+        }
+      }
+    } else {
+      const categoryProducts = allProducts[currentCategory];
+      if(categoryProducts){
+        for(const productKey in categoryProducts){
+          const product = categoryProducts[productKey];
+          product._key = `${currentCategory}-${productKey}`;
+          productsToShow.push(product);
+        }
+      }
+    }
+
+    if(productsToShow.length === 0){
+      grid.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
+          <p style="font-size: 18px; color: var(--text-light);">
+            No products found in this category.
+          </p>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = productsToShow.map((product) => {
+      const productKey = product._key;
+      const isFavorite = favorites.has(productKey);
+      const topIngredients = product.ingredients.slice(0, 3);
+      
+      return `
+        <div class="product-card" data-product-key="${productKey}">
+          <div class="product-image">
+            <img src="${product.image || 'Cleanser.png'}" alt="${product.name}" />
+            <div class="product-badge">${product.subcategory}</div>
+            <button class="product-favorite ${isFavorite ? 'active' : ''}" 
+                    onclick="toggleFavorite('${productKey}', event)" 
+                    title="Add to favorites">
+              ${isFavorite ? '❤️' : '🤍'}
+            </button>
+          </div>
+          <div class="product-info">
+            <div class="product-category">${product.category}</div>
+            <div class="product-name">${product.name}</div>
+            <div class="product-desc">${product.desc}</div>
+            <div class="product-ingredients">
+              ${topIngredients.map(ing => `<span class="ingredient-tag">${ing.name}</span>`).join('')}
+            </div>
+            <div class="product-actions">
+              <button class="product-btn" onclick="openProductModal('${productKey}')">View Details</button>
+              <button class="product-btn primary" onclick="openDesigner('${productKey}')">Design</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  // Toggle Favorite
+  function toggleFavorite(productKey, event){
+    if(event) event.stopPropagation();
+    
+    if(favorites.has(productKey)){
+      favorites.delete(productKey);
+    } else {
+      favorites.add(productKey);
+    }
+    
+    saveFavorites();
+    renderProducts();
+  }
+
+  // Open Product Modal
+  function openProductModal(productKey){
+    const modal = $("#productModal");
+    const productData = findProductByKey(productKey);
+    
+    if(!productData) return;
+
+    $("#modalCategory").textContent = productData.category;
+    $("#modalProductName").textContent = productData.name;
+    $("#modalProductDesc").textContent = productData.desc;
+    $("#modalProductImage").innerHTML = `
+      <img src="${productData.image || 'Cleanser.png'}" alt="${productData.name}" />
+    `;
+    
+    // Benefits
+    const benefitsList = $("#modalBenefits");
+    benefitsList.innerHTML = productData.benefits.map(benefit => 
+      `<li style="padding: 8px 0; color: var(--text-light);">• ${benefit}</li>`
+    ).join("");
+
+    // Usage
+    $("#modalUsage").textContent = productData.usage;
+
+    // Ingredients
+    const ingredientsList = $("#modalIngredients");
+    ingredientsList.innerHTML = productData.ingredients.map(ing => `
+      <div class="ingredient-card">
+        <h4>${ing.name}</h4>
+        <div class="ingredient-percentage">${ing.percentage}</div>
+        <p>${ing.benefit}</p>
+      </div>
+    `).join("");
+
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  // Find Product by Key
+  function findProductByKey(productKey){
+    const parts = productKey.split('-');
+    if(parts.length < 2) return null;
+    
+    const categoryKey = parts[0];
+    const productKeyName = parts.slice(1).join('-');
+    
+    const categoryProducts = allProducts[categoryKey];
+    if(categoryProducts && categoryProducts[productKeyName]){
+      return categoryProducts[productKeyName];
+    }
+    return null;
+  }
+
+  // Close Modal
+  function closeProductModal(){
+    const modal = $("#productModal");
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  // Open Designer
+  function openDesigner(productKey){
+    window.location.href = `index.html#design`;
+  }
+
+  // Add to Favorites
+  function addToFavorites(){
+    // Implementation
+  }
+
+  // Event Listeners
+  $("#closeModal").addEventListener("click", closeProductModal);
+  $("#productModal").addEventListener("click", (e) => {
+    if(e.target.id === "productModal"){
+      closeProductModal();
+    }
+  });
+
+  window.filterProducts = filterProducts;
+  window.toggleFavorite = toggleFavorite;
+  window.openProductModal = openProductModal;
+  window.closeProductModal = closeProductModal;
+  window.openDesigner = openDesigner;
+
+  // Initialize
+  loadFavorites();
+  renderProducts();
+</script>
+</body>
+</html>

@@ -1,0 +1,3638 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ALLURE — Personalized, Inclusive, Evidence-led Skincare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    :root{
+      /* Pastel Color Palette - Soft & Clean */
+      --bg: #F8F7F5;
+      --bg-white: #FFFFFF;
+      --text: #1A1A1A;
+      --text-light: #666666;
+      --pastel-lavender: #E8D5E3;
+      --pastel-blue: #D4E4F0;
+      --pastel-pink: #F5D7D7;
+      --pastel-rose: #F0D4D9;
+      --pastel-peach: #F5E0D4;
+      --pastel-yellow: #F5E8D4;
+      --pastel-purple: #E4D5E8;
+      --pastel-sky: #D4E8F0;
+      --accent-purple: #8B6FA8;
+      --accent-rose: #C97A8E;
+      --accent-blue: #6B9BC4;
+      --accent-primary: #8B6FA8;
+      --accent-secondary: #C97A8E;
+      --border: #E5E5E5;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body{
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, .serif{
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Navigation */
+    nav{
+      position: sticky;
+      top: 0;
+      background: rgba(248,247,245,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 20px 0;
+    }
+
+    .nav-container{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo{
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo img{
+      height: 41.2px; /* %3 increase from 40px */
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo-icon{
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-blue));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .nav-links{
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a{
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover{
+      color: var(--accent-primary);
+    }
+
+    .nav-cta{
+      background: var(--accent-primary);
+      color: white;
+      padding: 12px 28px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-cta:hover{
+      background: var(--accent-secondary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    /* Hamburger Menu */
+    .hamburger{
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .hamburger:active{
+      opacity: 0.7;
+    }
+
+    .hamburger:focus{
+      outline: 2px solid var(--accent-primary);
+      outline-offset: 2px;
+    }
+
+    .hamburger span{
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    .hamburger.active span:nth-child(1){
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .hamburger.active span:nth-child(2){
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3){
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    .mobile-menu{
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 280px;
+      height: 100vh;
+      background: var(--bg-white);
+      box-shadow: var(--shadow-lg);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      padding: 80px 0 40px;
+      overflow-y: auto;
+      visibility: hidden;
+    }
+
+    .mobile-menu.active{
+      transform: translateX(0);
+      visibility: visible;
+    }
+
+    .mobile-menu-overlay{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 999;
+    }
+
+    .mobile-menu-overlay.active{
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu-links{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mobile-menu-links li{
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-menu-links a{
+      display: block;
+      padding: 20px 32px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+
+    .mobile-menu-links a:hover{
+      background: var(--bg);
+      color: var(--accent-primary);
+      padding-left: 40px;
+    }
+
+    .mobile-menu-cta{
+      margin: 24px 32px;
+      display: block;
+      background: var(--accent-primary);
+      color: white;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+
+    .mobile-menu-cta:hover{
+      background: var(--accent-secondary);
+    }
+
+    .mobile-menu-close{
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: var(--bg);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: var(--text);
+      transition: all 0.2s;
+      z-index: 1001;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .mobile-menu-close:hover{
+      background: var(--border);
+      transform: rotate(90deg);
+    }
+
+    .mobile-menu-close:active{
+      opacity: 0.7;
+    }
+
+    .mobile-menu-close span{
+      line-height: 1;
+      font-weight: 300;
+    }
+
+    /* Hero Section */
+    .hero{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 100px 32px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-image{
+      width: 100%;
+      max-width: 800px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      margin: 40px auto;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .hero h1{
+      font-size: 72px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+      color: var(--text);
+    }
+
+    .hero .subtitle{
+      font-size: 24px;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    .hero-cta{
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary{
+      background: var(--accent-primary);
+      color: white;
+      padding: 18px 40px;
+      border-radius: var(--radius);
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary:hover{
+      background: var(--accent-primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-secondary{
+      background: var(--bg-white);
+      color: var(--text);
+      padding: 18px 40px;
+      border-radius: var(--radius);
+      font-size: 16px;
+      font-weight: 600;
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-secondary:hover{
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      background: var(--bg);
+    }
+
+    /* Section Styles */
+    section{
+      padding: 100px 32px;
+    }
+
+    .section-container{
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-header{
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .section-header h2{
+      font-size: 56px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+      line-height: 1.2;
+    }
+
+    .section-header .subtitle{
+      font-size: 20px;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto;
+      font-weight: 400;
+    }
+
+    /* Comparison Section */
+    .comparison-section{
+      background: var(--bg-white);
+      padding: 100px 32px;
+    }
+
+    .comparison-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .comparison-image{
+      width: 100%;
+      max-width: 500px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      margin: 0 auto 20px;
+      display: block;
+    }
+
+    .comparison-image{
+      width: 100%;
+      max-width: 500px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      margin: 0 auto;
+    }
+
+    .comparison-text h2{
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .comparison-text .highlight{
+      font-size: 24px;
+      color: var(--text-light);
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    .comparison-stats{
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .stat-item{
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .stat-number{
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      min-width: 120px;
+    }
+
+    .stat-label{
+      font-size: 18px;
+      color: var(--text-light);
+    }
+
+    /* Radar Chart */
+    .radar-container{
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .radar-chart{
+      width: 100%;
+      height: 500px;
+      position: relative;
+    }
+
+    canvas{
+      width: 100%;
+      height: 100%;
+    }
+
+    .radar-legend{
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .legend-color{
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+    }
+
+    /* Progress Bars Section */
+    .progress-section{
+      background: var(--bg-white);
+    }
+
+    .progress-comparison{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 48px;
+    }
+
+    .progress-card{
+      background: var(--bg);
+      padding: 32px;
+      border-radius: var(--radius-lg);
+    }
+
+    .progress-card h3{
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .progress-card .number{
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-bottom: 16px;
+    }
+
+    .progress-bar-container{
+      width: 100%;
+      height: 40px;
+      background: #E5E5E5;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar{
+      height: 100%;
+      border-radius: 20px;
+      transition: width 0.8s ease;
+    }
+
+    .progress-bar.conventional{
+      background: linear-gradient(90deg, #D4D4D4, #E5E5E5);
+      width: 15%;
+    }
+
+    .progress-bar.allure{
+      background: linear-gradient(90deg, var(--accent-blue), var(--pastel-purple));
+      width: 95%;
+    }
+
+    /* Features Grid */
+    .features-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+      gap: clamp(24px, 4vw, 32px);
+      margin-top: clamp(40px, 8vw, 64px);
+    }
+
+    .feature-card{
+      background: var(--bg-white);
+      padding: 0;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+
+    .feature-card-content{
+      padding: clamp(24px, 5vw, 40px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .feature-card:hover{
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .feature-image{
+      width: 100%;
+      max-width: 100%;
+      height: clamp(150px, 25vw, 200px);
+      min-height: 150px;
+      max-height: 200px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .feature-icon{
+      font-size: clamp(32px, 6vw, 48px);
+      margin-bottom: 16px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .feature-card h3{
+      font-size: clamp(18px, 3vw, 24px);
+      font-weight: 600;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .feature-card p{
+      color: var(--text-light);
+      font-size: clamp(14px, 2vw, 16px);
+      line-height: 1.6;
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+
+    /* Custom Packaging Designer */
+    .packaging-section{
+      background: var(--bg-white);
+    }
+
+    .packaging-designer{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 48px;
+    }
+
+    .product-type-selector{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .product-type-btn{
+      padding: 12px 16px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-white);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .product-type-btn:hover{
+      border-color: var(--accent-primary);
+      background: var(--pastel-purple);
+    }
+
+    .product-type-btn.active{
+      background: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+
+    .design-gallery{
+      margin-top: 64px;
+      padding-top: 64px;
+      border-top: 1px solid var(--border);
+    }
+
+    .gallery-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .gallery-item{
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .gallery-item:hover{
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: var(--accent-primary);
+    }
+
+    .gallery-preview{
+      width: 100%;
+      height: 200px;
+      background: var(--pastel-lavender);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gallery-preview img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-item-name{
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .gallery-item-date{
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    .gallery-actions{
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .gallery-action-btn{
+      flex: 1;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-white);
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+
+    .gallery-action-btn:hover{
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    .share-design{
+      margin-top: 32px;
+      padding: 24px;
+      background: var(--pastel-purple);
+      border-radius: var(--radius-lg);
+      text-align: center;
+    }
+
+    .share-design h3{
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .share-buttons{
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .share-btn{
+      padding: 14px 28px;
+      border: 2px solid var(--accent-primary);
+      border-radius: var(--radius);
+      background: var(--bg-white);
+      color: var(--accent-primary);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+    }
+
+    .share-btn:hover{
+      background: var(--accent-primary);
+      color: white;
+    }
+
+    .designer-preview{
+      background: var(--bg);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 600px;
+      position: sticky;
+      top: 100px;
+    }
+
+    .preview-3d-container{
+      perspective: 1200px;
+      perspective-origin: center center;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 40px;
+      min-height: 400px;
+    }
+
+    .product-3d{
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease-out;
+      position: relative;
+      cursor: grab;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .product-3d:active{
+      cursor: grabbing;
+      transition: transform 0.1s ease-out;
+    }
+
+    .product-3d.rotating{
+      animation: rotate3d 20s linear infinite;
+    }
+
+    @keyframes rotate3d{
+      from{ transform: rotateY(0deg) rotateX(0deg); }
+      to{ transform: rotateY(360deg) rotateX(0deg); }
+    }
+
+    /* Cleanser - Pump Bottle */
+    .bottle-preview.cleanser{
+      width: 180px;
+      height: 320px;
+      position: relative;
+      transform-style: preserve-3d;
+      margin: 0 auto;
+    }
+
+    .bottle-body.cleanser{
+      width: 100%;
+      height: 85%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      border-radius: 20px 20px 8px 8px;
+      position: absolute;
+      bottom: 0;
+      box-shadow: 
+        inset -15px 0 30px rgba(0,0,0,0.15),
+        inset 15px 0 30px rgba(255,255,255,0.4),
+        0 15px 50px rgba(0,0,0,0.25),
+        -5px 0 15px rgba(0,0,0,0.1);
+      border: 2px solid rgba(255,255,255,0.6);
+      transform: translateZ(0);
+    }
+
+    .bottle-pump.cleanser{
+      width: 50px;
+      height: 15%;
+      background: linear-gradient(135deg, #D8D8D8, #E8E8E8);
+      border-radius: 8px 8px 4px 4px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateZ(10px);
+      box-shadow: 
+        inset 0 -5px 10px rgba(0,0,0,0.25),
+        0 5px 15px rgba(0,0,0,0.15),
+        -2px 0 8px rgba(0,0,0,0.1);
+    }
+
+    /* Serum - Dropper Bottle */
+    .bottle-preview.serum{
+      width: 120px;
+      height: 280px;
+      position: relative;
+      transform-style: preserve-3d;
+      margin: 0 auto;
+    }
+
+    .bottle-body.serum{
+      width: 100%;
+      height: 75%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      border-radius: 12px 12px 6px 6px;
+      position: absolute;
+      bottom: 0;
+      box-shadow: 
+        inset -12px 0 20px rgba(0,0,0,0.15),
+        inset 12px 0 20px rgba(255,255,255,0.4),
+        0 12px 40px rgba(0,0,0,0.25),
+        -4px 0 12px rgba(0,0,0,0.1);
+      border: 2px solid rgba(255,255,255,0.6);
+      transform: translateZ(0);
+    }
+
+    .bottle-dropper.serum{
+      width: 30px;
+      height: 25%;
+      background: linear-gradient(135deg, #C8C8C8, #D8D8D8);
+      border-radius: 6px 6px 2px 2px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateZ(8px);
+      box-shadow: 
+        inset 0 -3px 8px rgba(0,0,0,0.25),
+        0 3px 10px rgba(0,0,0,0.15),
+        -1px 0 6px rgba(0,0,0,0.1);
+    }
+
+    .dropper-tip{
+      width: 8px;
+      height: 12px;
+      background: #B0B0B0;
+      border-radius: 0 0 4px 4px;
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%) translateZ(5px);
+    }
+
+    /* Moisturizer - Jar */
+    .bottle-preview.moisturizer{
+      width: 200px;
+      height: 220px;
+      position: relative;
+      transform-style: preserve-3d;
+      margin: 0 auto;
+    }
+
+    .bottle-body.moisturizer{
+      width: 100%;
+      height: 85%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      border-radius: 50% 50% 30% 30%;
+      position: absolute;
+      bottom: 0;
+      box-shadow: 
+        inset -20px 0 35px rgba(0,0,0,0.15),
+        inset 20px 0 35px rgba(255,255,255,0.4),
+        0 15px 50px rgba(0,0,0,0.25),
+        -6px 0 18px rgba(0,0,0,0.1);
+      border: 2px solid rgba(255,255,255,0.6);
+      transform: translateZ(0);
+    }
+
+    .jar-lid.moisturizer{
+      width: 110%;
+      height: 15%;
+      background: linear-gradient(135deg, #D8D8D8, #E8E8E8);
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateZ(12px);
+      box-shadow: 
+        inset 0 -6px 18px rgba(0,0,0,0.25),
+        0 6px 25px rgba(0,0,0,0.2),
+        -3px 0 12px rgba(0,0,0,0.1);
+    }
+
+    /* Sunscreen - Tube */
+    .bottle-preview.sunscreen{
+      width: 140px;
+      height: 300px;
+      position: relative;
+      transform-style: preserve-3d;
+      margin: 0 auto;
+    }
+
+    .bottle-body.sunscreen{
+      width: 100%;
+      height: 90%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      border-radius: 15px 15px 5px 5px;
+      position: absolute;
+      bottom: 0;
+      box-shadow: 
+        inset -12px 0 25px rgba(0,0,0,0.15),
+        inset 12px 0 25px rgba(255,255,255,0.4),
+        0 12px 45px rgba(0,0,0,0.25),
+        -5px 0 15px rgba(0,0,0,0.1);
+      border: 2px solid rgba(255,255,255,0.6);
+      transform: translateZ(0);
+    }
+
+    .tube-cap.sunscreen{
+      width: 60px;
+      height: 10%;
+      background: linear-gradient(135deg, #D0D0D0, #E0E0E0);
+      border-radius: 8px 8px 2px 2px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateZ(10px);
+      box-shadow: 
+        inset 0 -4px 10px rgba(0,0,0,0.25),
+        0 4px 12px rgba(0,0,0,0.15),
+        -2px 0 8px rgba(0,0,0,0.1);
+    }
+
+    /* Toner - Spray Bottle */
+    .bottle-preview.toner{
+      width: 160px;
+      height: 340px;
+      position: relative;
+      transform-style: preserve-3d;
+      margin: 0 auto;
+    }
+
+    .bottle-body.toner{
+      width: 100%;
+      height: 80%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      border-radius: 18px 18px 8px 8px;
+      position: absolute;
+      bottom: 0;
+      box-shadow: 
+        inset -12px 0 25px rgba(0,0,0,0.15),
+        inset 12px 0 25px rgba(255,255,255,0.4),
+        0 12px 45px rgba(0,0,0,0.25),
+        -5px 0 15px rgba(0,0,0,0.1);
+      border: 2px solid rgba(255,255,255,0.6);
+      transform: translateZ(0);
+    }
+
+    .spray-top.toner{
+      width: 70px;
+      height: 20%;
+      background: linear-gradient(135deg, #C8C8C8, #D8D8D8);
+      border-radius: 10px 10px 4px 4px;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateZ(10px);
+      box-shadow: 
+        inset 0 -5px 12px rgba(0,0,0,0.25),
+        0 5px 18px rgba(0,0,0,0.15),
+        -2px 0 10px rgba(0,0,0,0.1);
+    }
+
+    .spray-nozzle{
+      width: 20px;
+      height: 8px;
+      background: #A0A0A0;
+      border-radius: 0 0 10px 10px;
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%) translateZ(5px);
+    }
+
+    /* Eye Cream - Small Jar */
+    .bottle-preview.eye-cream{
+      width: 140px;
+      height: 160px;
+      position: relative;
+      transform-style: preserve-3d;
+      margin: 0 auto;
+    }
+
+    .bottle-body.eye-cream{
+      width: 100%;
+      height: 85%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      border-radius: 50% 50% 25% 25%;
+      position: absolute;
+      bottom: 0;
+      box-shadow: 
+        inset -15px 0 25px rgba(0,0,0,0.15),
+        inset 15px 0 25px rgba(255,255,255,0.4),
+        0 12px 40px rgba(0,0,0,0.25),
+        -5px 0 15px rgba(0,0,0,0.1);
+      border: 2px solid rgba(255,255,255,0.6);
+      transform: translateZ(0);
+    }
+
+    .jar-lid.eye-cream{
+      width: 110%;
+      height: 15%;
+      background: linear-gradient(135deg, #D8D8D8, #E8E8E8);
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateZ(10px);
+      box-shadow: 
+        inset 0 -5px 15px rgba(0,0,0,0.25),
+        0 5px 20px rgba(0,0,0,0.2),
+        -3px 0 10px rgba(0,0,0,0.1);
+    }
+
+    /* Product Label - 3D */
+    .bottle-label{
+      width: 85%;
+      min-height: 60px;
+      position: absolute;
+      bottom: 15%;
+      left: 50%;
+      transform: translateX(-50%) translateZ(8px);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 8px;
+      overflow: hidden;
+      box-shadow: 
+        inset 0 2px 12px rgba(0,0,0,0.15),
+        0 3px 10px rgba(0,0,0,0.2),
+        -2px 0 8px rgba(0,0,0,0.1);
+      z-index: 10;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .bottle-preview.serum .bottle-label{
+      bottom: 20%;
+      min-height: 50px;
+      padding: 10px 6px;
+    }
+
+    .bottle-preview.moisturizer .bottle-label,
+    .bottle-preview.eye-cream .bottle-label{
+      bottom: 25%;
+      min-height: 55px;
+      padding: 10px 6px;
+    }
+
+    .bottle-preview.sunscreen .bottle-label{
+      bottom: 18%;
+      min-height: 60px;
+      padding: 10px 6px;
+    }
+
+    .bottle-preview.toner .bottle-label{
+      bottom: 20%;
+      min-height: 55px;
+      padding: 10px 6px;
+    }
+
+    .bottle-label img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .bottle-label-text{
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--text);
+      width: 100%;
+      padding: 0 4px;
+    }
+
+    .bottle-label-text h3{
+      font-size: clamp(12px, 3vw, 20px);
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.2;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
+      max-width: 100%;
+      text-align: center;
+    }
+
+
+    /* Responsive Label Sizes for Different Product Types */
+    .bottle-preview.cleanser .bottle-label-text h3{
+      font-size: clamp(14px, 3.5vw, 22px);
+    }
+
+    .bottle-preview.serum .bottle-label-text h3{
+      font-size: clamp(12px, 3vw, 18px);
+    }
+
+    .bottle-preview.moisturizer .bottle-label-text h3,
+    .bottle-preview.eye-cream .bottle-label-text h3{
+      font-size: clamp(13px, 3.2vw, 20px);
+    }
+
+    .bottle-preview.sunscreen .bottle-label-text h3{
+      font-size: clamp(13px, 3.3vw, 20px);
+    }
+
+    .bottle-preview.toner .bottle-label-text h3{
+      font-size: clamp(12px, 3.1vw, 19px);
+    }
+
+    /* 3D Controls */
+    .view-controls{
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+
+    .view-btn{
+      padding: 10px 20px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-white);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .view-btn:hover{
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    .view-btn.active{
+      background: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+
+    .designer-controls{
+      background: var(--bg);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+    }
+
+    .control-group{
+      margin-bottom: 32px;
+    }
+
+    .control-group:last-child{
+      margin-bottom: 0;
+    }
+
+    .control-group label{
+      display: block;
+      font-weight: 600;
+      margin-bottom: 12px;
+      font-size: 16px;
+      color: var(--text);
+    }
+
+    .control-group input[type="text"]{
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-white);
+      color: var(--text);
+      transition: all 0.2s;
+      box-sizing: border-box;
+    }
+
+    .control-group input[type="text"]:focus{
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(139, 111, 168, 0.1);
+    }
+
+    .control-group input[type="text"]::placeholder{
+      color: var(--text-light);
+      opacity: 0.6;
+    }
+
+    .control-group p{
+      margin-top: 10px;
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    .image-upload-area{
+      width: 100%;
+      min-height: 200px;
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--bg-white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .image-upload-area:hover{
+      border-color: var(--accent-primary);
+      background: var(--pastel-purple);
+    }
+
+    .image-upload-area.has-image{
+      border: none;
+      padding: 0;
+    }
+
+    .image-upload-area img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .upload-icon{
+      font-size: 48px;
+      margin-bottom: 12px;
+      color: var(--text-light);
+    }
+
+    .upload-text{
+      color: var(--text-light);
+      font-size: 14px;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .upload-text strong{
+      color: var(--accent-primary);
+    }
+
+    input[type="file"]{
+      display: none;
+    }
+
+    .color-picker-group{
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .color-option{
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .color-option:hover{
+      transform: scale(1.1);
+    }
+
+    .color-option.selected{
+      border-color: var(--text);
+      transform: scale(1.15);
+    }
+
+    input[type="text"], textarea{
+      width: 100%;
+      padding: 14px 18px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-white);
+      color: var(--text);
+      transition: all 0.2s;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]:focus, textarea:focus{
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(139, 111, 168, 0.1);
+    }
+
+    input[type="text"]::placeholder, textarea::placeholder{
+      color: var(--text-light);
+      opacity: 0.6;
+    }
+
+    textarea{
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .remove-image{
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0,0,0,0.6);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .remove-image:hover{
+      background: rgba(0,0,0,0.8);
+    }
+
+    /* Products Grid */
+    .products-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 32px;
+      margin-top: 64px;
+    }
+
+    .product-card{
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: all 0.3s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .product-card:hover{
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent-primary);
+    }
+
+    .product-image{
+      width: 100%;
+      height: 320px;
+      background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-image img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .product-image .product-icon{
+      display: none;
+    }
+
+    .product-badge{
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--accent-primary);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .product-favorite{
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      font-size: 20px;
+    }
+
+    .product-favorite:hover{
+      background: white;
+      transform: scale(1.1);
+    }
+
+    .product-favorite.active{
+      color: #FF6B6B;
+    }
+
+    .product-info{
+      padding: 24px;
+    }
+
+    .product-category{
+      font-size: 12px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .product-name{
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .product-desc{
+      font-size: 15px;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .product-ingredients{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .ingredient-tag{
+      font-size: 11px;
+      padding: 4px 10px;
+      background: var(--pastel-purple);
+      color: var(--accent-primary);
+      border-radius: 12px;
+      font-weight: 500;
+    }
+
+    .product-actions{
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .product-btn{
+      flex: 1;
+      padding: 12px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-white);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .product-btn:hover{
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    .product-btn.primary{
+      background: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+
+    .product-btn.primary:hover{
+      background: var(--accent-primary);
+    }
+
+    /* Product Modal */
+    .product-modal{
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .product-modal.active{
+      display: flex;
+    }
+
+    .modal-content{
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-header{
+      padding: 32px 32px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .modal-close{
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: var(--bg);
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover{
+      background: var(--border);
+    }
+
+    .modal-body{
+      padding: 0 32px 32px;
+    }
+
+    .modal-product-grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 32px;
+    }
+
+    .modal-product-image{
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-blue));
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .modal-product-image img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .modal-product-image .product-icon{
+      display: none;
+    }
+
+    .modal-product-info h2{
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .modal-section{
+      margin-bottom: 32px;
+    }
+
+    .modal-section h3{
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .ingredients-list{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .ingredient-card{
+      background: var(--bg);
+      padding: 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .ingredient-card h4{
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .ingredient-card p{
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .ingredient-percentage{
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      margin-top: 8px;
+    }
+
+    /* Note Box */
+    .note{
+      background: var(--pastel-purple);
+      padding: 20px;
+      border-radius: var(--radius);
+      border-left: 4px solid var(--accent-primary);
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    /* Hidden */
+    [hidden]{
+      display: none !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .comparison-grid,
+      .packaging-designer{
+        grid-template-columns: 1fr;
+      }
+
+      .designer-preview{
+        position: relative;
+        top: 0;
+        padding: 30px 20px;
+        min-height: 500px;
+      }
+
+      .preview-3d-container{
+        min-height: 350px;
+      }
+
+      .bottle-preview.cleanser{
+        width: 150px;
+        height: 270px;
+      }
+
+      .bottle-preview.serum{
+        width: 100px;
+        height: 230px;
+      }
+
+      .bottle-preview.moisturizer,
+      .bottle-preview.eye-cream{
+        width: 170px;
+        height: 190px;
+      }
+
+      .bottle-preview.sunscreen{
+        width: 120px;
+        height: 250px;
+      }
+
+      .bottle-preview.toner{
+        width: 140px;
+        height: 290px;
+      }
+    }
+
+    @media (max-width: 768px){
+      .hamburger{
+        display: flex;
+      }
+
+      .nav-links,
+      .nav-cta{
+        display: none;
+      }
+
+      .nav-container{
+        padding: 0 20px;
+      }
+
+      .logo span{
+        display: none;
+      }
+
+      .logo img{
+        height: 37.08px; /* %3 increase from 36px */
+      }
+      .nav-links{
+        display: none;
+      }
+
+      .hero h1{
+        font-size: 48px;
+      }
+
+      .hero-image{
+        height: 300px;
+        margin: 30px auto;
+      }
+
+      .comparison-image{
+        height: 300px;
+      }
+
+      .feature-image{
+        height: clamp(120px, 20vw, 150px);
+        min-height: 120px;
+        max-height: 150px;
+      }
+
+      .feature-card-content{
+        padding: 24px 20px;
+      }
+
+      .features-grid{
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-top: 40px;
+      }
+
+      .feature-icon{
+        font-size: 36px;
+        margin-bottom: 12px;
+        margin-top: 16px;
+      }
+
+      .section-header h2{
+        font-size: 40px;
+      }
+
+      .progress-comparison{
+        grid-template-columns: 1fr;
+      }
+
+      /* Design Section Mobile Optimizations */
+      .packaging-designer{
+        gap: 24px;
+        padding: 24px 16px;
+      }
+
+      .designer-preview{
+        padding: 24px 16px;
+        min-height: 400px;
+        border-radius: var(--radius);
+      }
+
+      .preview-3d-container{
+        min-height: 300px;
+        margin-bottom: 24px;
+      }
+
+      .bottle-preview.cleanser{
+        width: 120px;
+        height: 220px;
+      }
+
+      .bottle-preview.serum{
+        width: 80px;
+        height: 190px;
+      }
+
+      .bottle-preview.moisturizer{
+        width: 140px;
+        height: 160px;
+      }
+
+      .bottle-preview.eye-cream{
+        width: 110px;
+        height: 130px;
+      }
+
+      .bottle-preview.sunscreen{
+        width: 100px;
+        height: 210px;
+      }
+
+      .bottle-preview.toner{
+        width: 120px;
+        height: 250px;
+      }
+
+      .bottle-label{
+        padding: 8px 6px;
+        min-height: 50px;
+      }
+
+      .bottle-preview.serum .bottle-label{
+        min-height: 40px;
+        padding: 6px 4px;
+      }
+
+      .bottle-preview.moisturizer .bottle-label,
+      .bottle-preview.eye-cream .bottle-label{
+        min-height: 45px;
+        padding: 6px 4px;
+      }
+
+      .view-controls{
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+
+      .view-btn{
+        padding: 8px 14px;
+        font-size: 12px;
+        flex: 1;
+        min-width: calc(50% - 4px);
+      }
+
+      .designer-controls{
+        padding: 24px 16px;
+      }
+
+      .control-group{
+        margin-bottom: 24px;
+      }
+
+      .control-group:last-child{
+        margin-bottom: 0;
+      }
+
+      .control-group label{
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      .control-group input[type="text"]{
+        padding: 12px 16px;
+        font-size: 14px;
+      }
+
+      .control-group p{
+        font-size: 12px;
+        margin-top: 8px;
+      }
+
+      .image-upload-area{
+        min-height: 150px;
+      }
+
+      .color-picker-group{
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .product-type-selector{
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .product-type-btn{
+        padding: 10px 14px;
+        font-size: 13px;
+        flex: 1;
+        min-width: calc(50% - 4px);
+      }
+
+      .design-gallery{
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+      }
+
+      .share-buttons{
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .share-btn{
+        padding: 12px 20px;
+        font-size: 14px;
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+
+      .designer-actions{
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .designer-actions .btn-primary,
+      .designer-actions .btn-secondary{
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px){
+      .bottle-preview.cleanser{
+        width: 100px;
+        height: 180px;
+      }
+
+      .bottle-preview.serum{
+        width: 70px;
+        height: 160px;
+      }
+
+      .bottle-preview.moisturizer{
+        width: 120px;
+        height: 140px;
+      }
+
+      .bottle-preview.eye-cream{
+        width: 90px;
+        height: 110px;
+      }
+
+      .bottle-preview.sunscreen{
+        width: 85px;
+        height: 180px;
+      }
+
+      .bottle-preview.toner{
+        width: 100px;
+        height: 210px;
+      }
+
+      .bottle-label{
+        padding: 6px 4px;
+        min-height: 50px;
+      }
+
+      .bottle-label-text h3{
+        font-size: clamp(11px, 4vw, 16px) !important;
+      }
+
+      .hero-image{
+        height: 250px;
+        margin: 20px auto;
+      }
+
+      .comparison-image{
+        height: 250px;
+      }
+
+      .feature-image{
+        height: clamp(100px, 18vw, 120px);
+        min-height: 100px;
+        max-height: 120px;
+      }
+
+      .feature-card-content{
+        padding: 20px 16px;
+      }
+
+      .features-grid{
+        gap: 20px;
+        margin-top: 32px;
+      }
+
+      .feature-icon{
+        font-size: 28px;
+        margin-bottom: 10px;
+        margin-top: 12px;
+      }
+
+      .feature-card h3{
+        margin-bottom: 8px;
+        font-size: 18px;
+      }
+
+      .feature-card p{
+        font-size: 13px;
+      }
+
+      .modal-product-image{
+        height: 300px;
+      }
+
+      .preview-3d-container{
+        min-height: 250px;
+      }
+
+      .view-controls{
+        gap: 6px;
+      }
+
+      .view-btn{
+        padding: 6px 10px;
+        font-size: 11px;
+      }
+
+      .color-picker-group{
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .product-type-selector{
+        gap: 6px;
+      }
+
+      .product-type-btn{
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="logo" id="logoLink">
+        <img src="logo.png" alt="ALLURE LABS" />
+        <span>ALLURE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="quiz.html">Skin Analysis</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="#design">Design</a></li>
+        <li><a href="#learn">Learn</a></li>
+      </ul>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <a href="quiz.html" class="nav-cta">Start Analysis</a>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+      <span>×</span>
+    </button>
+    <ul class="mobile-menu-links">
+      <li><a href="quiz.html">Skin Analysis</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="#design">Design</a></li>
+      <li><a href="#learn">Learn</a></li>
+    </ul>
+    <a href="quiz.html" class="mobile-menu-cta">Start Analysis</a>
+  </div>
+
+  <!-- Home View -->
+  <div id="homeView">
+    <!-- Welcome Section -->
+    <section class="hero">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <p style="font-size: clamp(14px, 2vw, 18px); color: var(--text-light); margin-bottom: clamp(16px, 3vw, 24px); letter-spacing: 1px; text-transform: uppercase; opacity: 0.8;">Welcome to</p>
+        <h1 style="font-size: clamp(42px, 8vw, 72px); font-weight: 700; margin-bottom: clamp(20px, 4vw, 32px); line-height: 1.1;">
+          Personalized skincare,<br/>
+          <span style="color: var(--accent-primary);">made inclusive.</span>
+        </h1>
+        <p class="subtitle" style="font-size: clamp(18px, 3vw, 22px); color: var(--text-light); margin-bottom: clamp(32px, 6vw, 48px); line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto;">
+          Discover a gentle, science-led approach to skincare that fits you. Get personalized recommendations with clear explanations — no one-size-fits-all solutions.
+        </p>
+        <img src="labs.png" alt="ALLURE skincare products" class="hero-image" style="margin-bottom: clamp(32px, 5vw, 48px);" />
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: clamp(24px, 4vw, 32px) 0;">
+          <span style="background: var(--pastel-purple); padding: clamp(8px, 1.5vw, 12px) clamp(16px, 3vw, 20px); border-radius: var(--radius); font-size: clamp(12px, 2vw, 14px); color: var(--text); font-weight: 500;">60s Quick</span>
+          <span style="background: var(--pastel-rose); padding: clamp(8px, 1.5vw, 12px) clamp(16px, 3vw, 20px); border-radius: var(--radius); font-size: clamp(12px, 2vw, 14px); color: var(--text); font-weight: 500;">3-min Detailed</span>
+          <span style="background: var(--pastel-blue); padding: clamp(8px, 1.5vw, 12px) clamp(16px, 3vw, 20px); border-radius: var(--radius); font-size: clamp(12px, 2vw, 14px); color: var(--text); font-weight: 500;">Fit Score</span>
+          <span style="background: var(--pastel-yellow); padding: clamp(8px, 1.5vw, 12px) clamp(16px, 3vw, 20px); border-radius: var(--radius); font-size: clamp(12px, 2vw, 14px); color: var(--text); font-weight: 500;">Explainable</span>
+        </div>
+        <div class="hero-cta" style="margin-top: clamp(32px, 5vw, 48px);">
+          <a href="quiz.html" class="btn-primary" id="heroStart" style="font-size: clamp(16px, 2.5vw, 18px); padding: clamp(14px, 2.5vw, 18px) clamp(32px, 5vw, 48px);">Get Started</a>
+          <a href="quiz.html" class="btn-secondary" id="heroContinue" hidden>Continue Saved Analysis</a>
+        </div>
+        <p style="font-size: clamp(12px, 1.8vw, 14px); color: var(--text-light); margin-top: clamp(20px, 3vw, 28px); opacity: 0.7;">
+          Inclusive • Evidence-led • Responsible
+        </p>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="comparison-section">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>How It Works</h2>
+          <p class="subtitle">Build a routine that fits you — gentle, science-led, and explainable</p>
+        </div>
+        <div class="comparison-grid">
+          <div class="comparison-text">
+            <div style="margin-bottom: 32px;">
+              <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px;">
+                <div style="width: 40px; height: 40px; background: var(--pastel-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">1</div>
+                <div>
+                  <h3 style="font-size: 20px; margin-bottom: 8px;">Tell us your skin type, sensitivity, and main goal.</h3>
+                  <p style="color: var(--text-light);">Quick questions to understand your unique needs.</p>
+                </div>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px;">
+                <div style="width: 40px; height: 40px; background: var(--pastel-rose); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">2</div>
+                <div>
+                  <h3 style="font-size: 20px; margin-bottom: 8px;">Choose preferences like fragrance-free, vegan, refill.</h3>
+                  <p style="color: var(--text-light);">Make responsible choices that align with your values.</p>
+                </div>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 16px;">
+                <div style="width: 40px; height: 40px; background: var(--pastel-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">3</div>
+                <div>
+                  <h3 style="font-size: 20px; margin-bottom: 8px;">Get a routine + Fit Score + "Why this works" explanation.</h3>
+                  <p style="color: var(--text-light);">Transparent, evidence-led recommendations you can trust.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <img src="labs1.png" alt="ALLURE skincare routine" class="comparison-image" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust & Transparency Section -->
+    <section class="progress-section">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>Trust & Transparency</h2>
+          <p class="subtitle">We explain the "why" behind every step</p>
+        </div>
+        <div class="progress-comparison">
+          <div class="progress-card">
+            <h3>Fit Score</h3>
+            <p style="color: var(--text-light); margin: 16px 0;">Shows how well the routine matches your inputs — completeness, sensitivity, climate, and detail level.</p>
+            <div class="number" style="font-size: 48px; color: var(--accent-primary);">92%</div>
+          </div>
+          <div class="progress-card">
+            <h3>Why This Works</h3>
+            <p style="color: var(--text-light); margin: 16px 0;">We explain the reasoning behind every recommendation. No black boxes — just clear, evidence-led guidance.</p>
+            <div style="background: var(--pastel-purple); padding: 20px; border-radius: var(--radius); margin-top: 16px;">
+              <p style="margin: 0; font-size: 14px; line-height: 1.6;">• Balanced cleansing + barrier support based on skin type & climate<br/>
+              • Actives chosen for your main goal<br/>
+              • Frequency adjusted for sensitivity</p>
+            </div>
+          </div>
+        </div>
+        <div style="background: var(--bg); padding: 24px; border-radius: var(--radius); margin-top: 32px; text-align: center;">
+          <p style="color: var(--text-light); font-size: 14px; margin: 0;">
+            <strong>Your answers are stored locally</strong> unless you reset them. We respect your privacy.
+          </p>
+        </div>
+        <div style="text-align: center; margin-top: 48px;">
+          <a href="quiz.html" class="btn-primary">Start Your Analysis</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>Why ALLURE?</h2>
+          <p class="subtitle">Inclusive, evidence-led, responsible skincare</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <img src="labs2.png" alt="Evidence-led" class="feature-image" />
+            <div class="feature-card-content">
+              <div class="feature-icon">🔬</div>
+              <h3>Evidence-led</h3>
+              <p>Every recommendation is based on dermatology research. Gentle, balanced routines backed by science.</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <img src="labs3.png" alt="Personalized" class="feature-image" />
+            <div class="feature-card-content">
+              <div class="feature-icon">✨</div>
+              <h3>Personalized</h3>
+              <p>Routines tailored to your skin type, sensitivity, and goals. Inclusive personalization, not one-size-fits-all.</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <img src="labs4.png" alt="Design Your Package" class="feature-image" />
+            <div class="feature-card-content">
+              <div class="feature-icon">🎨</div>
+              <h3>Design Your Package</h3>
+              <p>Customize your product packaging with your own images, colors, and text. Make it truly yours.</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <img src="labs5.png" alt="Responsible" class="feature-image" />
+            <div class="feature-card-content">
+              <div class="feature-icon">🌱</div>
+              <h3>Responsible</h3>
+              <p>Barrier-friendly formulas. Sustainable choices. Clean ingredients that respect your skin and the planet.</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <img src="labs6.png" alt="Inclusive" class="feature-image" />
+            <div class="feature-card-content">
+              <div class="feature-icon">💚</div>
+              <h3>Inclusive</h3>
+              <p>Solutions for every skin type and tone. Validation, confidence, safety, relief — for everyone.</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <img src="labs7.png" alt="Transparent" class="feature-image" />
+            <div class="feature-card-content">
+              <div class="feature-icon">📊</div>
+              <h3>Transparent</h3>
+              <p>Fit Score shows match quality. Clear "why" explanations. No hidden algorithms — just honest guidance.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="shop">
+      <div class="section-container">
+        <div class="section-header">
+          <h2>Your Personalized Routine</h2>
+          <p class="subtitle">Gentle, balanced products tailored to your skin</p>
+        </div>
+        <div class="products-grid" id="productsGrid">
+          <!-- Products will be dynamically added -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div class="product-modal" id="productModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <div class="product-category" id="modalCategory">Category</div>
+            <h2 id="modalProductName">Product Name</h2>
+          </div>
+          <button class="modal-close" id="closeModal">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-product-grid">
+            <div class="modal-product-image" id="modalProductImage">
+              🧴
+            </div>
+            <div class="modal-product-info">
+              <p id="modalProductDesc" style="color: var(--text-light); margin-bottom: 24px;"></p>
+              
+              <div class="modal-section">
+                <h3>Why This Works</h3>
+                <ul id="modalBenefits" style="list-style: none; padding: 0;">
+                  <!-- Benefits will be added here -->
+                </ul>
+              </div>
+
+              <div class="modal-section">
+                <h3>How to Use</h3>
+                <p id="modalUsage" style="color: var(--text-light);"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-section">
+            <h3>Evidence-led Ingredients</h3>
+            <div class="ingredients-list" id="modalIngredients">
+              <!-- Ingredients will be added here -->
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 32px;">
+            <button class="btn-primary" onclick="openDesignerForProduct()">Design Package</button>
+            <button class="btn-secondary" onclick="addToFavorites()">Add to Favorites</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Custom Packaging Designer -->
+  <section class="packaging-section" id="design">
+    <div class="section-container">
+      <div class="section-header">
+        <h2>Design Your Package</h2>
+        <p class="subtitle">Personalize your product packaging with your own style</p>
+      </div>
+      <div class="packaging-designer">
+        <div class="designer-preview">
+          <div class="preview-3d-container">
+            <div class="product-3d" id="product3D">
+              <div class="bottle-preview cleanser" id="bottlePreview">
+                <div class="bottle-body cleanser"></div>
+                <div class="bottle-pump cleanser"></div>
+                <div class="bottle-label" id="bottleLabel">
+                  <div class="bottle-label-text" id="bottleLabelText">
+                    <h3 id="previewProductName">Your Product</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="view-controls">
+            <button class="view-btn" onclick="rotateView('left')">← Rotate</button>
+            <button class="view-btn" onclick="toggleAutoRotate()" id="autoRotateBtn">Auto Rotate</button>
+            <button class="view-btn" onclick="rotateView('right')">Rotate →</button>
+            <button class="view-btn" onclick="resetView()">Reset View</button>
+          </div>
+          <button class="btn-primary" id="saveDesign" style="margin-top: 20px;">Save Design</button>
+        </div>
+        <div class="designer-controls">
+          <div class="control-group">
+            <label>Upload Background Image</label>
+            <div class="image-upload-area" id="imageUploadArea">
+              <input type="file" id="imageInput" accept="image/*" />
+              <div class="upload-icon">📷</div>
+              <div class="upload-text">
+                Click to upload or drag and drop<br/>
+                <strong>PNG, JPG up to 10MB</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label>Background Color</label>
+            <div class="color-picker-group">
+              <div class="color-option" style="background: var(--pastel-lavender);" data-color="#E8D5E3"></div>
+              <div class="color-option" style="background: var(--pastel-blue);" data-color="#D4E4F0"></div>
+              <div class="color-option" style="background: var(--pastel-pink);" data-color="#F5D7D7"></div>
+              <div class="color-option" style="background: var(--pastel-rose);" data-color="#F0D4D9"></div>
+              <div class="color-option" style="background: var(--pastel-yellow);" data-color="#F5E8D4"></div>
+              <div class="color-option" style="background: var(--pastel-purple);" data-color="#E4D5E8"></div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label>Product Type</label>
+            <div class="product-type-selector">
+              <button class="product-type-btn active" data-type="cleanser">Cleanser</button>
+              <button class="product-type-btn" data-type="serum">Serum</button>
+              <button class="product-type-btn" data-type="moisturizer">Moisturizer</button>
+              <button class="product-type-btn" data-type="sunscreen">Sunscreen</button>
+              <button class="product-type-btn" data-type="toner">Toner</button>
+              <button class="product-type-btn" data-type="eye-cream">Eye Cream</button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label>Product Name</label>
+            <input type="text" id="productNameInput" placeholder="e.g., Day Moisturizer" />
+            <p style="font-size: 13px; color: var(--text-light); margin-top: 10px; line-height: 1.5;">Personalize your product with a custom name</p>
+          </div>
+
+          <div class="control-group" style="display: flex; flex-direction: column; gap: 12px; margin-top: 40px;">
+            <button class="btn-primary" id="applyDesign" style="width: 100%; padding: 16px 24px; font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Apply Design</button>
+            <button class="btn-secondary" id="resetDesign" style="width: 100%; padding: 14px 24px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Reset Design</button>
+            <button class="btn-secondary" id="downloadDesign" style="width: 100%; padding: 14px 24px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Download as Image</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Design Gallery -->
+      <div class="design-gallery">
+        <div class="section-header">
+          <h2>Your Saved Designs</h2>
+          <p class="subtitle">Your personalized packaging designs</p>
+        </div>
+        <div class="gallery-grid" id="designGallery">
+          <!-- Saved designs will be added here -->
+        </div>
+      </div>
+
+      <!-- Share Design Section -->
+      <div class="share-design">
+        <h3>Share Your Design</h3>
+        <p style="color: var(--text-light); margin-bottom: 24px;">Share your personalized packaging design</p>
+        <div class="share-buttons">
+          <a href="https://www.instagram.com/allurexlabs/" target="_blank" rel="noopener noreferrer" class="share-btn">
+            📷 Follow us on Instagram
+          </a>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer Footer -->
+  <footer style="background: var(--bg); padding: clamp(40px, 7vw, 60px) clamp(20px, 4vw, 32px); text-align: center; border-top: 1px solid var(--border); margin-top: 100px;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <p style="font-size: clamp(13px, 2vw, 14px); color: var(--text-light); line-height: 1.6; margin-bottom: 12px;">
+        <strong>ALLURE provides educational suggestions, not medical diagnosis.</strong>
+      </p>
+      <p style="font-size: clamp(12px, 1.8vw, 13px); color: var(--text-light); line-height: 1.6;">
+        If you have persistent irritation, acne, or other skin concerns, please consult a dermatologist. 
+        Our recommendations are evidence-led and personalized, but they are not a substitute for professional medical advice.
+      </p>
+      
+      <!-- Social Media -->
+      <div style="margin: 32px 0 24px;">
+        <a href="https://www.instagram.com/allurexlabs/" target="_blank" rel="noopener noreferrer" 
+           style="display: inline-flex; align-items: center; gap: 10px; color: var(--accent-primary); text-decoration: none; font-size: clamp(15px, 2vw, 16px); font-weight: 600; transition: all 0.2s; padding: 12px 24px; border: 2px solid var(--accent-primary); border-radius: var(--radius); background: var(--bg-white);">
+          <span style="font-size: 20px;">📷</span>
+          <span>Follow @allurexlabs</span>
+        </a>
+      </div>
+      
+      <p style="font-size: clamp(11px, 1.6vw, 12px); color: var(--text-light); margin-top: 24px;">
+        © 2024 ALLURE. Inclusive • Evidence-led • Responsible
+      </p>
+    </div>
+  </footer>
+
+<script>
+  const state = {
+    packaging: {
+      image: null,
+      color: "#E8D5E3",
+      productName: "Your Product",
+      productType: "cleanser"
+    },
+    favorites: new Set(),
+    savedDesigns: []
+  };
+
+  // Initialize default 3D view
+  if(typeof updateProduct3D === 'function'){
+    // Will be called after DOM loads
+  }
+
+  // Product Data
+  const productsData = {
+    cleanser: {
+      name: "Gentle Gel Cleanser",
+      desc: "Barrier-friendly cleanser that removes impurities without stripping. Balanced for your skin type.",
+      category: "Cleanser",
+      benefits: [
+        "Gentle, balanced cleansing",
+        "Barrier support",
+        "Calm, comfortable feel",
+        "Evidence-led formula"
+      ],
+      usage: "Apply to damp skin, massage gently in circular motions, then rinse with lukewarm water. Use morning and evening.",
+      ingredients: [
+        { name: "Niacinamide", percentage: "4%", benefit: "Balances sebum production and minimizes pores" },
+        { name: "Ceramides", percentage: "2%", benefit: "Strengthens skin barrier" },
+        { name: "Glycerin", percentage: "5%", benefit: "Provides hydration" },
+        { name: "Hyaluronic Acid", percentage: "1%", benefit: "Locks in moisture" }
+      ],
+      icon: "🧴"
+    },
+    serum: {
+      name: "Balancing Serum",
+      desc: "Evidence-led active serum chosen for your main goal. Gentle, targeted support.",
+      category: "Serum",
+      benefits: [
+        "Targets your specific goal",
+        "Barrier-friendly actives",
+        "Calm, balanced results",
+        "Science-backed formula"
+      ],
+      usage: "Apply 2-3 drops to clean skin after cleansing, before moisturizer. Use morning and/or evening.",
+      ingredients: [
+        { name: "Niacinamide", percentage: "10%", benefit: "Controls oil and minimizes pores" },
+        { name: "Zinc PCA", percentage: "1%", benefit: "Reduces inflammation" },
+        { name: "Allantoin", percentage: "0.5%", benefit: "Soothes and calms skin" }
+      ],
+      icon: "💧"
+    },
+    moisturizer: {
+      name: "Barrier Support Moisturizer",
+      desc: "Gentle moisturizer that locks in moisture and supports your skin barrier. Comfort and relief.",
+      category: "Moisturizer",
+      benefits: [
+        "Barrier support",
+        "Long-lasting comfort",
+        "Relief for sensitive skin",
+        "Inclusive formula"
+      ],
+      usage: "Apply a dime-sized amount to face and neck after serum. Use morning and evening.",
+      ingredients: [
+        { name: "Ceramides", percentage: "3%", benefit: "Repairs skin barrier" },
+        { name: "Cholesterol", percentage: "1%", benefit: "Supports barrier function" },
+        { name: "Fatty Acids", percentage: "2%", benefit: "Restores lipid balance" },
+        { name: "Squalane", percentage: "5%", benefit: "Provides lightweight hydration" }
+      ],
+      icon: "🧴"
+    },
+    sunscreen: {
+      name: "Daily Protection SPF",
+      desc: "Responsible, mineral-based protection. Barrier-friendly and climate-adjusted for your needs.",
+      category: "Sunscreen",
+      benefits: [
+        "Broad spectrum protection",
+        "Responsible formula",
+        "Barrier-friendly",
+        "Climate-adjusted"
+      ],
+      usage: "Apply liberally 15 minutes before sun exposure. Reapply every 2 hours or after swimming/sweating.",
+      ingredients: [
+        { name: "Zinc Oxide", percentage: "20%", benefit: "Physical UV blocker" },
+        { name: "Titanium Dioxide", percentage: "5%", benefit: "Additional UV protection" },
+        { name: "Niacinamide", percentage: "2%", benefit: "Antioxidant support" }
+      ],
+      icon: "☀️"
+    }
+  };
+
+  const $ = (sel) => document.querySelector(sel);
+  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+  // Hamburger Menu Toggle - Initialize after DOM is ready
+  (function initMobileMenu(){
+    function init(){
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      const mobileMenuOverlay = document.getElementById("mobileMenuOverlay");
+
+      if(!hamburgerBtn || !mobileMenu || !mobileMenuOverlay){
+        console.warn("Mobile menu elements not found", {
+          hamburgerBtn: !!hamburgerBtn,
+          mobileMenu: !!mobileMenu,
+          mobileMenuOverlay: !!mobileMenuOverlay
+        });
+        return false;
+      }
+
+      function toggleMobileMenu(e){
+        if(e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        const isActive = mobileMenu.classList.contains("active");
+        
+        console.log("Toggling menu, current state:", isActive);
+        
+        hamburgerBtn.classList.toggle("active");
+        mobileMenu.classList.toggle("active");
+        mobileMenuOverlay.classList.toggle("active");
+        
+        if(!isActive){
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "";
+        }
+        
+        console.log("Menu toggled, new state:", mobileMenu.classList.contains("active"));
+      }
+
+      // Add event listeners
+      hamburgerBtn.addEventListener("click", toggleMobileMenu);
+      hamburgerBtn.addEventListener("touchend", function(e){
+        e.preventDefault();
+        toggleMobileMenu(e);
+      });
+      
+      mobileMenuOverlay.addEventListener("click", toggleMobileMenu);
+
+      // Close button
+      const closeBtn = document.getElementById("mobileMenuClose");
+      if(closeBtn){
+        closeBtn.addEventListener("click", toggleMobileMenu);
+        closeBtn.addEventListener("touchend", function(e){
+          e.preventDefault();
+          toggleMobileMenu(e);
+        });
+      }
+
+      // Close menu when clicking a link
+      const menuLinks = mobileMenu.querySelectorAll(".mobile-menu-links a, .mobile-menu-cta");
+      menuLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          if(mobileMenu.classList.contains("active")){
+            toggleMobileMenu();
+          }
+        });
+      });
+
+      // Close menu on escape key
+      document.addEventListener("keydown", (e) => {
+        if(e.key === "Escape" && mobileMenu.classList.contains("active")){
+          toggleMobileMenu();
+        }
+      });
+
+      console.log("Mobile menu initialized successfully");
+      return true;
+    }
+
+    // Try to initialize immediately
+    if(document.readyState === "loading"){
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      // If DOM is already loaded, try after a short delay to ensure all elements are ready
+      setTimeout(init, 100);
+    }
+  })();
+
+  // Navigation
+  function showHome(){
+    $("#homeView").hidden = false;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+
+  // Load products based on quiz results
+  function loadProductsFromQuiz(){
+    const quizData = sessionStorage.getItem("allure_quiz_state");
+    let recommendedProducts = [];
+
+    if(quizData){
+      try{
+        const data = JSON.parse(quizData);
+        const answers = data.answers || {};
+        
+        // Determine products based on quiz answers
+        if(answers.skinType || answers.concerns){
+          recommendedProducts = ["cleanser", "serum", "moisturizer", "sunscreen"];
+        }
+      } catch(e){}
+    }
+
+    // Default products if no quiz data
+    if(recommendedProducts.length === 0){
+      recommendedProducts = ["cleanser", "serum", "moisturizer", "sunscreen"];
+    }
+
+    renderProducts(recommendedProducts);
+  }
+
+  function renderProducts(productKeys){
+    const grid = $("#productsGrid");
+    
+    if(productKeys.length === 0){
+      grid.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
+          <p style="font-size: 18px; color: var(--text-light); margin-bottom: 24px;">
+            Complete your skin analysis to see your personalized routine
+          </p>
+          <a href="quiz.html" class="btn-primary">Start Analysis</a>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = productKeys.map(key => {
+      const product = productsData[key];
+      if(!product) return "";
+      
+      const isFavorite = state.favorites.has(key);
+      const topIngredients = product.ingredients.slice(0, 3);
+      
+      // Map product keys to images
+      const productImages = {
+        cleanser: "Cleanser.png",
+        serum: "Serum.png",
+        moisturizer: "Moisturizer.png",
+        sunscreen: "Sunscreen.png",
+        toner: "Toner.png",
+        "eye-cream": "Eye Cream.png"
+      };
+      const productImage = productImages[key] || "Cleanser.png";
+      
+      return `
+        <div class="product-card" data-product-key="${key}">
+          <div class="product-image">
+            <img src="${productImage}" alt="${product.name}" />
+            <div class="product-badge">Recommended</div>
+            <button class="product-favorite ${isFavorite ? 'active' : ''}" 
+                    onclick="toggleFavorite('${key}', event)" 
+                    title="Add to favorites">
+              ${isFavorite ? '❤️' : '🤍'}
+            </button>
+          </div>
+          <div class="product-info">
+            <div class="product-category">${product.category}</div>
+            <div class="product-name">${product.name}</div>
+            <div class="product-desc">${product.desc}</div>
+            <div class="product-ingredients">
+              ${topIngredients.map(ing => `<span class="ingredient-tag">${ing.name}</span>`).join('')}
+            </div>
+            <div class="product-actions">
+              <button class="product-btn" onclick="openProductModal('${key}')">View Details</button>
+              <button class="product-btn primary" onclick="openDesignerForProduct('${key}')">Design</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  function openProductModal(productKey){
+    const product = productsData[productKey];
+    if(!product) return;
+
+    // Map product keys to images
+    const productImages = {
+      cleanser: "Cleanser.png",
+      serum: "Serum.png",
+      moisturizer: "Moisturizer.png",
+      sunscreen: "Sunscreen.png",
+      toner: "Toner.png",
+      "eye-cream": "Eye Cream.png"
+    };
+    const productImage = productImages[productKey] || "Cleanser.png";
+    
+    $("#modalCategory").textContent = product.category;
+    $("#modalProductName").textContent = product.name;
+    $("#modalProductDesc").textContent = product.desc;
+    $("#modalProductImage").innerHTML = `
+      <img src="${productImage}" alt="${product.name}" />
+    `;
+    
+    // Why This Works
+    const benefitsList = $("#modalBenefits");
+    benefitsList.innerHTML = product.benefits.map(benefit => 
+      `<li style="padding: 8px 0; color: var(--text-light);">• ${benefit}</li>`
+    ).join("");
+
+    // Usage
+    $("#modalUsage").textContent = product.usage;
+
+    // Ingredients
+    const ingredientsList = $("#modalIngredients");
+    ingredientsList.innerHTML = product.ingredients.map(ing => `
+      <div class="ingredient-card">
+        <h4>${ing.name}</h4>
+        <div class="ingredient-percentage">${ing.percentage}</div>
+        <p>${ing.benefit}</p>
+      </div>
+    `).join("");
+
+    $("#productModal").classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeProductModal(){
+    $("#productModal").classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  function toggleFavorite(productKey, event){
+    event.stopPropagation();
+    if(state.favorites.has(productKey)){
+      state.favorites.delete(productKey);
+    } else {
+      state.favorites.add(productKey);
+    }
+    saveFavorites();
+    renderProducts(Array.from(state.favorites.size > 0 ? Object.keys(productsData) : ["cleanser", "serum", "moisturizer", "sunscreen"]));
+  }
+
+  function openDesignerForProduct(productKey){
+    if(productKey){
+      const product = productsData[productKey];
+      if(product){
+        state.packaging.productName = product.name;
+        state.packaging.productType = productKey;
+        $("#productNameInput").value = product.name;
+        
+        // Activate corresponding product type button
+        $$(".product-type-btn").forEach(btn => {
+          btn.classList.remove("active");
+          if(btn.dataset.type === productKey){
+            btn.classList.add("active");
+          }
+        });
+        
+        updateProduct3D();
+      }
+    }
+    
+    document.getElementById("design").scrollIntoView({ behavior: "smooth" });
+    closeProductModal();
+  }
+
+  function saveFavorites(){
+    localStorage.setItem("allure_favorites", JSON.stringify(Array.from(state.favorites)));
+  }
+
+  function loadFavorites(){
+    const saved = localStorage.getItem("allure_favorites");
+    if(saved){
+      try{
+        state.favorites = new Set(JSON.parse(saved));
+      } catch(e){}
+    }
+  }
+
+  window.openProductModal = openProductModal;
+  window.toggleFavorite = toggleFavorite;
+  window.openDesignerForProduct = openDesignerForProduct;
+
+  function load(){
+    const raw = localStorage.getItem("allure_skin_state");
+    if(!raw) return;
+    try{
+      const payload = JSON.parse(raw);
+      if(payload.packaging) state.packaging = payload.packaging;
+      updatePackagingPreview();
+    }catch(e){}
+  }
+
+  // 3D View State
+  let currentRotation = { x: 0, y: 0 };
+  let isAutoRotating = false;
+  let rotationInterval = null;
+
+  // Update 3D Product Preview
+  function updateProduct3D(){
+    const productType = state.packaging.productType || "cleanser";
+    const preview = $("#bottlePreview");
+    
+    // Remove all classes
+    preview.className = "bottle-preview " + productType;
+    
+    // Clear and rebuild based on product type
+    preview.innerHTML = "";
+    
+    if(productType === "cleanser"){
+      preview.innerHTML = `
+        <div class="bottle-body cleanser"></div>
+        <div class="bottle-pump cleanser"></div>
+        <div class="bottle-label" id="bottleLabel">
+          <div class="bottle-label-text" id="bottleLabelText">
+            <h3 id="previewProductName">${state.packaging.productName}</h3>
+          </div>
+        </div>
+      `;
+    } else if(productType === "serum"){
+      preview.innerHTML = `
+        <div class="bottle-body serum"></div>
+        <div class="bottle-dropper serum">
+          <div class="dropper-tip"></div>
+        </div>
+        <div class="bottle-label" id="bottleLabel">
+          <div class="bottle-label-text" id="bottleLabelText">
+            <h3 id="previewProductName">${state.packaging.productName}</h3>
+          </div>
+        </div>
+      `;
+    } else if(productType === "moisturizer"){
+      preview.innerHTML = `
+        <div class="bottle-body moisturizer"></div>
+        <div class="jar-lid moisturizer"></div>
+        <div class="bottle-label" id="bottleLabel">
+          <div class="bottle-label-text" id="bottleLabelText">
+            <h3 id="previewProductName">${state.packaging.productName}</h3>
+          </div>
+        </div>
+      `;
+    } else if(productType === "sunscreen"){
+      preview.innerHTML = `
+        <div class="bottle-body sunscreen"></div>
+        <div class="tube-cap sunscreen"></div>
+        <div class="bottle-label" id="bottleLabel">
+          <div class="bottle-label-text" id="bottleLabelText">
+            <h3 id="previewProductName">${state.packaging.productName}</h3>
+          </div>
+        </div>
+      `;
+    } else if(productType === "toner"){
+      preview.innerHTML = `
+        <div class="bottle-body toner"></div>
+        <div class="spray-top toner">
+          <div class="spray-nozzle"></div>
+        </div>
+        <div class="bottle-label" id="bottleLabel">
+          <div class="bottle-label-text" id="bottleLabelText">
+            <h3 id="previewProductName">${state.packaging.productName}</h3>
+          </div>
+        </div>
+      `;
+    } else if(productType === "eye-cream"){
+      preview.innerHTML = `
+        <div class="bottle-body eye-cream"></div>
+        <div class="jar-lid eye-cream"></div>
+        <div class="bottle-label" id="bottleLabel">
+          <div class="bottle-label-text" id="bottleLabelText">
+            <h3 id="previewProductName">${state.packaging.productName}</h3>
+          </div>
+        </div>
+      `;
+    }
+    
+    updatePackagingPreview();
+    update3DTransform();
+    // Adjust text size after DOM update
+    setTimeout(adjustLabelTextSize, 100);
+  }
+
+  // Packaging Designer Functions
+  function updatePackagingPreview(){
+    const label = $("#bottleLabel");
+    if(!label) return;
+    
+    const labelText = $("#bottleLabelText");
+    
+    label.style.background = state.packaging.color;
+    
+    if(state.packaging.image){
+      if(label.querySelector("img")){
+        label.querySelector("img").src = state.packaging.image;
+      } else {
+        const img = document.createElement("img");
+        img.src = state.packaging.image;
+        img.style.cssText = "width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1;";
+        label.insertBefore(img, label.firstChild);
+      }
+    } else {
+      const img = label.querySelector("img");
+      if(img) img.remove();
+    }
+    
+    if(labelText){
+      const nameEl = labelText.querySelector("#previewProductName");
+      if(nameEl) nameEl.textContent = state.packaging.productName;
+      
+      // Adjust font sizes based on text length and product type
+      adjustLabelTextSize();
+    }
+  }
+
+  // Dynamically adjust label text size based on content length
+  function adjustLabelTextSize(){
+    const label = $("#bottleLabel");
+    const labelText = $("#bottleLabelText");
+    if(!label || !labelText) return;
+
+    const nameEl = labelText.querySelector("#previewProductName");
+    if(!nameEl) return;
+
+    const productName = state.packaging.productName || "";
+    const productType = state.packaging.productType || "cleanser";
+    
+    // Base font sizes by product type (in pixels)
+    const baseSizes = {
+      cleanser: 22,
+      serum: 18,
+      moisturizer: 20,
+      sunscreen: 20,
+      toner: 19,
+      "eye-cream": 20
+    };
+    
+    const baseSize = baseSizes[productType] || baseSizes.cleanser;
+    
+    // Calculate reduction factor based on text length
+    const nameLength = productName.length;
+    
+    // Adjust name font size based on length
+    let nameSize = baseSize;
+    if(nameLength > 15){
+      nameSize = baseSize * (15 / nameLength);
+    }
+    if(nameLength > 25){
+      nameSize = baseSize * 0.65;
+    }
+    if(nameLength > 35){
+      nameSize = baseSize * 0.5;
+    }
+    
+    // Ensure minimum readable size
+    nameSize = Math.max(nameSize, 12);
+    
+    // Apply size with clamp for responsive behavior
+    nameEl.style.fontSize = `clamp(${nameSize * 0.6}px, ${nameSize * 0.9}vw, ${nameSize}px)`;
+    
+    // Adjust line height for better fit
+    nameEl.style.lineHeight = "1.2";
+    
+    // Force word wrapping
+    nameEl.style.wordBreak = "break-word";
+    nameEl.style.overflowWrap = "break-word";
+  }
+
+  // 3D Rotation Functions
+  function update3DTransform(){
+    const product3D = $("#product3D");
+    if(!product3D) return;
+    
+    product3D.style.transform = `rotateY(${currentRotation.y}deg) rotateX(${currentRotation.x}deg)`;
+  }
+
+  function rotateView(direction){
+    if(direction === "left"){
+      currentRotation.y -= 15;
+    } else if(direction === "right"){
+      currentRotation.y += 15;
+    }
+    update3DTransform();
+  }
+
+  function resetView(){
+    currentRotation = { x: 0, y: 0 };
+    update3DTransform();
+  }
+
+  function toggleAutoRotate(){
+    isAutoRotating = !isAutoRotating;
+    const btn = $("#autoRotateBtn");
+    const product3D = $("#product3D");
+    
+    if(isAutoRotating){
+      btn.textContent = "Stop Rotate";
+      btn.classList.add("active");
+      product3D.classList.add("rotating");
+    } else {
+      btn.textContent = "Auto Rotate";
+      btn.classList.remove("active");
+      product3D.classList.remove("rotating");
+    }
+  }
+
+  // Mouse drag for 3D rotation
+  let isDragging = false;
+  let lastMouseX = 0;
+  let lastMouseY = 0;
+
+  function init3DInteractions(){
+    const product3D = $("#product3D");
+    if(!product3D) return;
+
+    product3D.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+      product3D.style.cursor = "grabbing";
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if(!isDragging) return;
+      
+      const deltaX = e.clientX - lastMouseX;
+      const deltaY = e.clientY - lastMouseY;
+      
+      currentRotation.y += deltaX * 0.5;
+      currentRotation.x -= deltaY * 0.5;
+      
+      // Limit X rotation
+      currentRotation.x = Math.max(-30, Math.min(30, currentRotation.x));
+      
+      update3DTransform();
+      
+      lastMouseX = e.clientX;
+      lastMouseY = e.clientY;
+    });
+
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+      if(product3D) product3D.style.cursor = "grab";
+    });
+
+    // Touch support
+    product3D.addEventListener("touchstart", (e) => {
+      isDragging = true;
+      lastMouseX = e.touches[0].clientX;
+      lastMouseY = e.touches[0].clientY;
+    });
+
+    document.addEventListener("touchmove", (e) => {
+      if(!isDragging) return;
+      e.preventDefault();
+      
+      const deltaX = e.touches[0].clientX - lastMouseX;
+      const deltaY = e.touches[0].clientY - lastMouseY;
+      
+      currentRotation.y += deltaX * 0.5;
+      currentRotation.x -= deltaY * 0.5;
+      currentRotation.x = Math.max(-30, Math.min(30, currentRotation.x));
+      
+      update3DTransform();
+      
+      lastMouseX = e.touches[0].clientX;
+      lastMouseY = e.touches[0].clientY;
+    });
+
+    document.addEventListener("touchend", () => {
+      isDragging = false;
+    });
+  }
+
+  window.rotateView = rotateView;
+  window.toggleAutoRotate = toggleAutoRotate;
+  window.resetView = resetView;
+
+  // Image Upload
+  const imageUploadArea = $("#imageUploadArea");
+  const imageInput = $("#imageInput");
+
+  imageUploadArea.addEventListener("click", () => imageInput.click());
+  imageUploadArea.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    imageUploadArea.style.borderColor = "var(--accent-primary)";
+  });
+  imageUploadArea.addEventListener("dragleave", () => {
+    imageUploadArea.style.borderColor = "var(--border)";
+  });
+  imageUploadArea.addEventListener("drop", (e) => {
+    e.preventDefault();
+    imageUploadArea.style.borderColor = "var(--border)";
+    const file = e.dataTransfer.files[0];
+    if(file && file.type.startsWith("image/")){
+      handleImageUpload(file);
+    }
+  });
+
+  imageInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if(file) handleImageUpload(file);
+  });
+
+  function handleImageUpload(file){
+    if(file.size > 10 * 1024 * 1024){
+      alert("Image size must be less than 10MB");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      state.packaging.image = e.target.result;
+      imageUploadArea.classList.add("has-image");
+      imageUploadArea.innerHTML = `
+        <img src="${e.target.result}" />
+        <button class="remove-image" onclick="removeImage()">×</button>
+      `;
+      updatePackagingPreview();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  window.removeImage = function(){
+    state.packaging.image = null;
+    imageUploadArea.classList.remove("has-image");
+    imageUploadArea.innerHTML = `
+      <input type="file" id="imageInput" accept="image/*" />
+      <div class="upload-icon">📷</div>
+      <div class="upload-text">
+        Click to upload or drag and drop<br/>
+        <strong>PNG, JPG up to 10MB</strong>
+      </div>
+    `;
+    document.getElementById("imageInput").addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if(file) handleImageUpload(file);
+    });
+    updatePackagingPreview();
+  };
+
+  // Color Picker
+  $$(".color-option").forEach(option => {
+    option.addEventListener("click", () => {
+      $$(".color-option").forEach(o => o.classList.remove("selected"));
+      option.classList.add("selected");
+      state.packaging.color = option.dataset.color;
+      updatePackagingPreview();
+    });
+  });
+
+  // Initialize 3D on page load
+  if($("#product3D")){
+    init3DInteractions();
+  }
+
+  // Product Type Selector
+  $$(".product-type-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      $$(".product-type-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      state.packaging.productType = btn.dataset.type;
+      
+      const product = productsData[btn.dataset.type];
+      if(product){
+        state.packaging.productName = product.name;
+        $("#productNameInput").value = product.name;
+      }
+      
+      updateProduct3D();
+    });
+  });
+
+  // Product Name
+  $("#productNameInput").addEventListener("input", (e) => {
+    state.packaging.productName = e.target.value || "Your Product";
+    updatePackagingPreview();
+    // Small delay to ensure DOM is updated
+    setTimeout(adjustLabelTextSize, 50);
+  });
+
+  // Modal Close
+  $("#closeModal").addEventListener("click", closeProductModal);
+  $("#productModal").addEventListener("click", (e) => {
+    if(e.target.id === "productModal"){
+      closeProductModal();
+    }
+  });
+
+  // Download Design as Image
+  $("#downloadDesign").addEventListener("click", () => {
+    const container = $(".preview-3d-container");
+    if(!container) return;
+    
+    // Temporarily stop auto-rotate for screenshot
+    const wasRotating = isAutoRotating;
+    if(wasRotating) toggleAutoRotate();
+    
+    html2canvas(container, {
+      backgroundColor: '#F8F7F5',
+      scale: 2,
+      useCORS: true,
+      logging: false
+    }).then(canvas => {
+      const link = document.createElement("a");
+      link.download = `allure-${state.packaging.productName.replace(/\s+/g, '-')}-${state.packaging.productType}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      
+      // Restore auto-rotate if it was on
+      if(wasRotating) setTimeout(() => toggleAutoRotate(), 500);
+    }).catch(err => {
+      console.error("Error generating image:", err);
+      alert("Error generating image. Please try again.");
+      if(wasRotating) setTimeout(() => toggleAutoRotate(), 500);
+    });
+  });
+
+  // Load and render saved designs
+  function loadSavedDesigns(){
+    const saved = localStorage.getItem("allure_saved_designs");
+    if(saved){
+      try{
+        state.savedDesigns = JSON.parse(saved);
+        renderDesignGallery();
+      } catch(e){}
+    }
+  }
+
+  function renderDesignGallery(){
+    const gallery = $("#designGallery");
+    if(state.savedDesigns.length === 0){
+      gallery.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 40px 20px; color: var(--text-light);">
+          No saved designs yet. Create your first personalized design above!
+        </div>
+      `;
+      return;
+    }
+
+    gallery.innerHTML = state.savedDesigns.map((design, index) => `
+      <div class="gallery-item" onclick="loadDesignFromGallery(${index})">
+        <div class="gallery-preview" style="background: ${design.color}">
+          ${design.image ? `<img src="${design.image}" />` : ''}
+        </div>
+        <div class="gallery-item-name">${design.productName}</div>
+        <div class="gallery-item-date">${new Date(design.savedAt).toLocaleDateString()}</div>
+        <div class="gallery-actions">
+          <button class="gallery-action-btn" onclick="deleteDesign(${index}, event)">Delete</button>
+          <button class="gallery-action-btn" onclick="loadDesignFromGallery(${index}, event)">Load</button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function loadDesignFromGallery(index, event){
+    if(event) event.stopPropagation();
+    const design = state.savedDesigns[index];
+    if(!design) return;
+
+    state.packaging = { ...design };
+    $("#productNameInput").value = design.productName;
+    
+    // Set color
+    $$(".color-option").forEach(opt => {
+      opt.classList.remove("selected");
+      if(opt.dataset.color === design.color){
+        opt.classList.add("selected");
+      }
+    });
+
+    // Set product type
+    $$(".product-type-btn").forEach(btn => {
+      btn.classList.remove("active");
+      if(btn.dataset.type === design.productType){
+        btn.classList.add("active");
+      }
+    });
+
+    // Set image
+    if(design.image){
+      const uploadArea = $("#imageUploadArea");
+      uploadArea.classList.add("has-image");
+      uploadArea.innerHTML = `
+        <img src="${design.image}" />
+        <button class="remove-image" onclick="removeImage()">×</button>
+      `;
+    }
+
+    updateProduct3D();
+    document.getElementById("design").scrollIntoView({ behavior: "smooth" });
+  }
+
+  function deleteDesign(index, event){
+    if(event) event.stopPropagation();
+    if(!confirm("Delete this design?")) return;
+    
+    state.savedDesigns.splice(index, 1);
+    localStorage.setItem("allure_saved_designs", JSON.stringify(state.savedDesigns));
+    renderDesignGallery();
+  }
+
+  window.loadDesignFromGallery = loadDesignFromGallery;
+  window.deleteDesign = deleteDesign;
+
+  // Instagram link handler (if needed)
+  function openInstagram(){
+    window.open("https://www.instagram.com/allurexlabs/", "_blank", "noopener,noreferrer");
+  }
+
+  window.openInstagram = openInstagram;
+
+  $("#applyDesign").addEventListener("click", () => {
+    updateProduct3D();
+    alert("Design applied! You can now save it.");
+  });
+
+  $("#saveDesign").addEventListener("click", () => {
+    const design = {
+      ...state.packaging,
+      savedAt: new Date().toISOString()
+    };
+    
+    // Add to saved designs
+    state.savedDesigns.push(design);
+    localStorage.setItem("allure_saved_designs", JSON.stringify(state.savedDesigns));
+    
+    // Also save as current design
+    localStorage.setItem("allure_skin_state", JSON.stringify({ packaging: design }));
+    
+    alert("Design saved successfully!");
+    renderDesignGallery();
+  });
+
+  $("#resetDesign").addEventListener("click", () => {
+    if(confirm("Reset design to default?")){
+      state.packaging = {
+        image: null,
+        color: "#E8D5E3",
+        productName: "Your Product",
+        productType: "cleanser"
+      };
+      removeImage();
+      $("#productNameInput").value = "";
+      $$(".color-option")[0].click();
+      $$(".product-type-btn")[0].click();
+      resetView();
+      updateProduct3D();
+    }
+  });
+
+  window.showDesigner = function(){
+    document.getElementById("design").scrollIntoView({ behavior: "smooth" });
+  };
+
+  // Radar Chart
+  function drawRadarChart(){
+    const canvas = document.getElementById("radarChart");
+    const ctx = canvas.getContext("2d");
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = Math.min(centerX, centerY) - 40;
+    const axes = 6;
+    const angles = [];
+
+    for(let i = 0; i < axes; i++){
+      angles.push((Math.PI * 2 * i) / axes - Math.PI / 2);
+    }
+
+    const labels = ["Primary Concern", "Secondary Concern", "Heritage", "Other Concerns", "Environment", "Lifestyle"];
+
+    // Draw grid
+    ctx.strokeStyle = "#E5E5E5";
+    ctx.lineWidth = 1;
+    for(let level = 1; level <= 5; level++){
+      ctx.beginPath();
+      const r = (radius * level) / 5;
+      for(let i = 0; i < axes; i++){
+        const x = centerX + r * Math.cos(angles[i]);
+        const y = centerY + r * Math.sin(angles[i]);
+        if(i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.stroke();
+    }
+
+    // Draw axes
+    ctx.strokeStyle = "#CCCCCC";
+    ctx.lineWidth = 1;
+    angles.forEach((angle, i) => {
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(centerX + radius * Math.cos(angle), centerY + radius * Math.sin(angle));
+      ctx.stroke();
+
+      // Labels
+      const labelX = centerX + (radius + 20) * Math.cos(angle);
+      const labelY = centerY + (radius + 20) * Math.sin(angle);
+      ctx.fillStyle = "#666666";
+      ctx.font = "12px Inter";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(labels[i], labelX, labelY);
+    });
+
+    // Draw allure data (large polygon)
+    const allureData = [0.9, 0.85, 0.8, 0.75, 0.9, 0.85];
+    ctx.fillStyle = "rgba(74, 144, 164, 0.3)";
+    ctx.strokeStyle = "#4A90A4";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    allureData.forEach((value, i) => {
+      const r = radius * value;
+      const x = centerX + r * Math.cos(angles[i]);
+      const y = centerY + r * Math.sin(angles[i]);
+      if(i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Draw conventional data (small polygon)
+    const conventionalData = [0.2, 0.15, 0.2, 0.15, 0.2, 0.15];
+    ctx.fillStyle = "rgba(212, 232, 212, 0.5)";
+    ctx.strokeStyle = "#D4E8D4";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    conventionalData.forEach((value, i) => {
+      const r = radius * value;
+      const x = centerX + r * Math.cos(angles[i]);
+      const y = centerY + r * Math.sin(angles[i]);
+      if(i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+  }
+
+  // Event Listeners
+  $("#logoLink").addEventListener("click", (e) => { e.preventDefault(); showHome(); });
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if(target){
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  });
+
+  // Initialize
+  const canvas = document.getElementById("radarChart");
+  canvas.width = 500;
+  canvas.height = 500;
+  drawRadarChart();
+
+  load();
+  loadFavorites();
+  loadSavedDesigns();
+  loadProductsFromQuiz();
+  showHome();
+  updateProduct3D();
+  renderDesignGallery();
+  
+  // Initialize 3D interactions
+  setTimeout(() => {
+    init3DInteractions();
+  }, 100);
+  
+  // Check for saved quiz progress (sessionStorage - resets on new tab/window)
+  if(sessionStorage.getItem("allure_quiz_state")){
+    const continueBtn = $("#heroContinue");
+    if(continueBtn) continueBtn.hidden = false;
+  }
+</script>
+</body>
+</html>

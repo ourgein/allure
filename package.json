@@ -1,0 +1,15 @@
+{
+  "name": "allure-skincare",
+  "version": "1.0.0",
+  "description": "ALLURE - Personalized Skincare Platform",
+  "scripts": {
+    "build": "echo 'No build step required for static site'"
+  },
+  "keywords": [
+    "skincare",
+    "personalized",
+    "beauty"
+  ],
+  "author": "ALLURE",
+  "license": "MIT"
+}

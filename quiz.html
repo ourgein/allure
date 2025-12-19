@@ -1,0 +1,1464 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Skin Analysis — ALLURE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Pastel Color Palette - Apple-like */
+      --bg: #F8F7F5;
+      --bg-white: #FFFFFF;
+      --text: #1A1A1A;
+      --text-light: #666666;
+      --pastel-lavender: #E8D5E3;
+      --pastel-blue: #D4E4F0;
+      --pastel-pink: #F5D7D7;
+      --pastel-rose: #F0D4D9;
+      --pastel-peach: #F5E0D4;
+      --pastel-yellow: #F5E8D4;
+      --pastel-purple: #E4D5E8;
+      --pastel-sky: #D4E8F0;
+      --accent-blue: #6B9BC4;
+      --accent-purple: #8B6FA8;
+      --accent-rose: #C97A8E;
+      --accent-primary: #8B6FA8;
+      --accent-secondary: #C97A8E;
+      --border: #E5E5E5;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body{
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-white);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, .serif{
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Multi-Step Quiz Styles */
+    .quiz-wrapper{
+      min-height: 100vh;
+      background: var(--bg-white);
+      padding: 0;
+    }
+
+    .quiz-header{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(16px, 3vw, 24px) clamp(20px, 4vw, 32px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
+      position: relative;
+    }
+
+    .quiz-header .logo{
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .quiz-back{
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+
+    .quiz-back:hover{
+      color: var(--text);
+    }
+
+    .quiz-progress{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .progress-category{
+      background: var(--pastel-purple);
+      color: var(--accent-primary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .progress-dots{
+      display: flex;
+      gap: 8px;
+    }
+
+    .progress-dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.2s;
+    }
+
+    .progress-dot.active{
+      background: var(--accent-primary);
+    }
+
+    .quiz-content{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(40px, 7vw, 60px) clamp(20px, 4vw, 32px);
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(40px, 7vw, 60px);
+    }
+
+    .quiz-question-section{
+      min-height: 500px;
+    }
+
+    .quiz-question h2{
+      font-size: clamp(24px, 4.5vw, 36px);
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.2;
+      color: var(--text);
+      word-wrap: break-word;
+    }
+
+    .quiz-hint{
+      color: var(--text-light);
+      font-size: clamp(12px, 1.8vw, 14px);
+      margin-bottom: 32px;
+    }
+
+    .quiz-options{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .quiz-option{
+      padding: clamp(16px, 2.5vw, 18px) clamp(20px, 3vw, 24px);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--bg-white);
+      cursor: pointer;
+      font-size: clamp(14px, 2vw, 16px);
+      font-weight: 500;
+      transition: all 0.2s;
+      color: var(--text);
+      text-align: left;
+      width: 100%;
+      box-sizing: border-box;
+      word-wrap: break-word;
+    }
+
+    .quiz-option:hover{
+      border-color: var(--accent-primary);
+      background: var(--pastel-purple);
+    }
+
+    .quiz-option.selected{
+      background: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+
+    .why-we-ask{
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .why-we-ask h3{
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .why-we-ask p{
+      font-size: clamp(13px, 2vw, 15px);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    .why-we-ask .highlight{
+      background: #FFF9C4;
+      padding: 2px 4px;
+      border-radius: 3px;
+    }
+
+    .research-sources{
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--text-light);
+    }
+
+    .research-sources strong{
+      display: block;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .research-logos{
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .research-logo{
+      font-size: 11px;
+      color: var(--text-light);
+      padding: 8px 12px;
+      background: var(--bg);
+      border-radius: 6px;
+    }
+
+    .ingredients-sidebar{
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+
+    .ingredient-item{
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .ingredient-icon{
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      background: var(--pastel-purple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .ingredient-name{
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .quiz-navigation{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .quiz-nav-btn{
+      padding: clamp(12px, 2vw, 14px) clamp(24px, 4vw, 32px);
+      border-radius: var(--radius);
+      font-size: clamp(13px, 2vw, 15px);
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-sizing: border-box;
+    }
+
+    .quiz-nav-btn.next{
+      background: var(--accent-primary);
+      color: white;
+      margin-left: auto;
+    }
+
+    .quiz-nav-btn.next:hover{
+      background: var(--accent-secondary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .quiz-nav-btn.back{
+      background: transparent;
+      color: var(--text-light);
+      border: 2px solid var(--border);
+    }
+
+    .quiz-nav-btn.back:hover{
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+
+    .quiz-nav-btn:disabled{
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Input Fields */
+    input[type="text"]{
+      width: 100%;
+      padding: clamp(14px, 2.5vw, 18px) clamp(20px, 3vw, 24px);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      font-size: clamp(14px, 2vw, 16px);
+      font-family: inherit;
+      transition: border-color 0.2s;
+      margin-bottom: 32px;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]:focus{
+      outline: none;
+      border-color: var(--accent-primary);
+    }
+
+    .logo{
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo img{
+      height: clamp(32.96px, 5.15vw, 49.44px); /* %3 increase */
+      width: auto;
+      object-fit: contain;
+    }
+
+    .logo-icon{
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-blue));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .quiz-content{
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .ingredients-sidebar{
+        position: relative;
+        top: 0;
+      }
+    }
+
+    @media (max-width: 768px){
+      .quiz-question h2{
+        font-size: 28px;
+      }
+
+      .quiz-content{
+        padding: 40px 24px;
+      }
+
+      .quiz-header{
+        padding: 16px 20px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .quiz-header .logo{
+        position: relative;
+        left: auto;
+        transform: none;
+        margin: 0 auto;
+        order: 2;
+      }
+
+      .quiz-back{
+        order: 1;
+      }
+
+      .quiz-progress{
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        margin-top: 12px;
+      }
+
+      .logo{
+        font-size: 24px;
+      }
+
+      .quiz-intro h1{
+        font-size: 36px !important;
+      }
+
+      .quiz-intro p{
+        font-size: 16px !important;
+      }
+
+      .quiz-option{
+        padding: 16px 20px;
+        font-size: 15px;
+      }
+
+      .why-we-ask{
+        padding: 20px;
+        margin-top: 32px;
+      }
+
+      .why-we-ask h3{
+        font-size: 12px;
+      }
+
+      .why-we-ask p{
+        font-size: 14px;
+      }
+
+      .quiz-nav-btn{
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px){
+      .quiz-question h2{
+        font-size: 24px;
+      }
+
+      .quiz-content{
+        padding: 24px 16px;
+      }
+
+      .quiz-header{
+        padding: 12px 16px;
+      }
+
+      .logo{
+        font-size: 20px;
+      }
+
+      .logo-icon{
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+      }
+
+      .quiz-intro{
+        margin-bottom: 32px !important;
+        padding: 0 10px !important;
+      }
+
+      .quiz-intro h1{
+        font-size: 28px !important;
+        margin-bottom: 12px !important;
+      }
+
+      .quiz-intro p{
+        font-size: 14px !important;
+      }
+
+      .quiz-option{
+        padding: 14px 16px;
+        font-size: 14px;
+      }
+
+      .quiz-nav-btn{
+        padding: 10px 20px;
+        font-size: 13px;
+        flex: 1;
+      }
+
+      .quiz-navigation{
+        gap: 12px;
+      }
+
+      .progress-category{
+        font-size: 11px;
+        padding: 6px 12px;
+      }
+
+      .why-we-ask{
+        padding: 16px;
+        margin-top: 24px;
+      }
+
+      .why-we-ask h3{
+        font-size: 11px;
+      }
+
+      .why-we-ask p{
+        font-size: 13px;
+      }
+
+      /* Results Page Responsive */
+      .results-container{
+        padding: 24px 16px !important;
+      }
+
+      .results-header{
+        margin-bottom: 32px !important;
+      }
+
+      .fit-score-card{
+        padding: 24px 16px !important;
+        margin-bottom: 32px !important;
+      }
+
+      .routine-section{
+        margin-bottom: 32px !important;
+      }
+
+      .routine-card{
+        padding: 20px 16px !important;
+      }
+
+      .routine-item{
+        gap: 12px !important;
+        margin-bottom: 12px !important;
+      }
+
+      .why-works-section{
+        padding: 24px 16px !important;
+        margin-bottom: 32px !important;
+      }
+
+      .quiz-nav-btn.next{
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+    }
+
+    @media (max-width: 480px){
+      .results-container{
+        padding: 20px 12px !important;
+      }
+
+      .results-header{
+        margin-bottom: 24px !important;
+      }
+
+      .fit-score-card{
+        padding: 20px 12px !important;
+        margin-bottom: 24px !important;
+      }
+
+      .routine-section{
+        margin-bottom: 24px !important;
+      }
+
+      .routine-title{
+        margin-bottom: 16px !important;
+      }
+
+      .routine-card{
+        padding: 16px 12px !important;
+      }
+
+      .routine-item{
+        gap: 10px !important;
+        margin-bottom: 12px !important;
+        flex-wrap: wrap;
+      }
+
+      .why-works-section{
+        padding: 20px 12px !important;
+        margin-bottom: 24px !important;
+      }
+
+      .why-works-section li{
+        padding: 10px 0 !important;
+        font-size: 13px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="quiz-wrapper">
+    <div class="quiz-header">
+      <a href="index.html" class="quiz-back" id="quizBack">
+        <span>←</span> Back
+      </a>
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="ALLURE LABS" />
+        <span>ALLURE</span>
+      </a>
+      <div class="quiz-progress">
+        <div class="progress-category" id="progressCategory">Skin</div>
+        <div class="progress-dots" id="progressDots"></div>
+      </div>
+    </div>
+
+    <div class="quiz-content">
+      <div class="quiz-question-section">
+        <div class="quiz-intro" style="text-align: center; margin-bottom: clamp(32px, 6vw, 48px); padding: 0 20px;">
+          <h1 style="font-size: clamp(32px, 6vw, 48px); font-weight: 700; margin-bottom: 16px; color: var(--text);">Skin Analysis</h1>
+          <p style="font-size: clamp(16px, 2.5vw, 18px); color: var(--text-light); max-width: 600px; margin: 0 auto; line-height: 1.6;">
+            Build a routine that fits you — gentle, science-led, and explainable.
+          </p>
+        </div>
+        <div id="quizQuestionContainer">
+          <!-- Questions will be dynamically inserted here -->
+        </div>
+        <div class="quiz-navigation">
+          <button class="quiz-nav-btn back" id="prevBtn" disabled>Back</button>
+          <button class="quiz-nav-btn next" id="nextBtn">Next</button>
+        </div>
+      </div>
+
+      <div class="ingredients-sidebar">
+        <div id="ingredientsList">
+          <!-- Ingredients will be dynamically inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // Quiz Questions Data
+  const quizQuestions = [
+    // Skin Category
+    {
+      category: "Skin",
+      question: "What's your name?",
+      type: "text",
+      key: "name",
+      placeholder: "Your name",
+      whyWeAsk: "We personalize your routine with your name to create a more engaging experience."
+    },
+    {
+      category: "Skin",
+      question: "What's your main goal?",
+      type: "multiple",
+      key: "concerns",
+      hint: "90% of users choose 3 or more",
+      options: [
+        { value: "sensitivity", label: "Sensitivity / Barrier stress" },
+        { value: "redness", label: "Redness / Barrier stress" },
+        { value: "fine_lines", label: "Fine lines or wrinkles" },
+        { value: "firmness", label: "Loss of firmness or elasticity" },
+        { value: "hyperpigmentation", label: "Hyper-pigmentation" },
+        { value: "acne", label: "Acne / Breakouts" },
+        { value: "dryness", label: "Dryness" },
+        { value: "other", label: "Other" }
+      ],
+      whyWeAsk: "Your specific concerns guide our ingredient prioritization and formulation focus. Research shows that customized regimens tailored to individual concerns outperform one-size-fits-all routines.",
+      highlight: "outperform",
+      research: ["UCLA David Geffen School of Medicine", "Thomas Jefferson University"]
+    },
+    {
+      category: "Skin",
+      question: "Are you concerned with dark circles under or around the eyes?",
+      type: "single",
+      key: "darkCircles",
+      options: [
+        { value: "not_concerned", label: "Not concerned" },
+        { value: "little", label: "A little concerned" },
+        { value: "somewhat", label: "Somewhat concerned" },
+        { value: "highly", label: "Highly concerned" },
+        { value: "extremely", label: "Extremely concerned" }
+      ],
+      whyWeAsk: "Dark circles indicate vascular congestion, melanin deposits, or structural volume loss creating shadowing. Your concern level determines our periorbital treatment strategy and ingredient selection.",
+      highlight: "periorbital treatment",
+      research: ["UCIRVINE", "Thomas Jefferson University"]
+    },
+    {
+      category: "Skin",
+      question: "When you wake up in the morning, your skin feels:",
+      type: "single",
+      key: "morningFeel",
+      options: [
+        { value: "tight_dry", label: "Tight or dry" },
+        { value: "comfortable", label: "Comfortable" },
+        { value: "oily_tzone", label: "Oily in t-zone" },
+        { value: "oily", label: "Oily" },
+        { value: "not_sure", label: "Not sure" }
+      ],
+      whyWeAsk: "Morning skin feel reveals your natural sebum production and overnight water loss patterns. This helps us determine your skin type and select appropriate moisturizer weight and oil-balancing ingredients.",
+      highlight: "oil-control needs",
+      research: ["MARIAN UNIVERSITY", "COLUMBIA UNIVERSITY", "NYU"]
+    },
+    {
+      category: "Skin",
+      question: "After a shower, your face tends to feel:",
+      type: "single",
+      key: "afterShower",
+      options: [
+        { value: "tight_dry", label: "Tight or dry" },
+        { value: "no_sensation", label: "No particular sensation" },
+        { value: "slight_sheen", label: "Slight sheen" },
+        { value: "oily", label: "Oily" },
+        { value: "never_noticed", label: "Never noticed anything" }
+      ],
+      whyWeAsk: "Post-shower skin feel indicates your natural oil barrier recovery and water sensitivity. Hot water strips natural oils - tight skin shows slower sebum replenishment, while quick oil return suggests active sebaceous glands.",
+      highlight: "skin's resilience",
+      research: ["UCDAVIS", "UNIVERSIDAD DE GRANADA"]
+    },
+    {
+      category: "Skin",
+      question: "What's your skin type?",
+      type: "single",
+      key: "skinType",
+      options: [
+        { value: "dry", label: "Dry" },
+        { value: "normal", label: "Neutral/normal" },
+        { value: "combination", label: "Combination" },
+        { value: "oily", label: "Oily" },
+        { value: "not_sure", label: "Not sure" }
+      ],
+      whyWeAsk: "Your self-perception helps us understand your skin's behavior patterns and current routine effectiveness."
+    },
+    {
+      category: "Skin",
+      question: "How sensitive is your skin?",
+      type: "single",
+      key: "sensitivity",
+      options: [
+        { value: "not_sensitive", label: "Not sensitive" },
+        { value: "slightly", label: "Slightly sensitive" },
+        { value: "moderately", label: "Moderately sensitive" },
+        { value: "very", label: "Very sensitive" },
+        { value: "extremely", label: "Extremely sensitive" }
+      ],
+      whyWeAsk: "Sensitivity level helps us choose gentle, barrier-friendly ingredients and adjust product strength."
+    },
+    {
+      category: "Skin",
+      question: "Breakouts in last 2 weeks?",
+      type: "single",
+      key: "recentBreakouts",
+      options: [
+        { value: "none", label: "None" },
+        { value: "few", label: "A few" },
+        { value: "some", label: "Some" },
+        { value: "many", label: "Many" }
+      ],
+      whyWeAsk: "Recent breakouts help us understand your skin's current state and adjust actives accordingly."
+    },
+    {
+      category: "Skin",
+      question: "Redness / barrier stress?",
+      type: "single",
+      key: "barrierStress",
+      options: [
+        { value: "none", label: "No redness" },
+        { value: "occasional", label: "Occasional" },
+        { value: "frequent", label: "Frequent" },
+        { value: "constant", label: "Constant" }
+      ],
+      whyWeAsk: "Barrier stress requires gentle, supportive ingredients to restore skin health."
+    },
+    {
+      category: "Skin",
+      question: "Skin tone (melanin level)?",
+      type: "single",
+      key: "skinTone",
+      options: [
+        { value: "very_fair", label: "Very fair/very light" },
+        { value: "fair", label: "Fair/light" },
+        { value: "olive", label: "Olive or medium" },
+        { value: "light_brown", label: "Light brown" },
+        { value: "dark_brown", label: "Dark brown" },
+        { value: "very_dark", label: "Very dark" },
+        { value: "not_sure", label: "Not sure" }
+      ],
+      whyWeAsk: "Skin tone affects how your skin responds to certain ingredients and helps us customize formulations for optimal results."
+    },
+    // Lifestyle Category
+    {
+      category: "Lifestyle",
+      question: "Age range",
+      type: "single",
+      key: "age",
+      options: [
+        { value: "20_below", label: "20 or below" },
+        { value: "21_26", label: "21-26" },
+        { value: "27_33", label: "27-33" },
+        { value: "34_39", label: "34-39" },
+        { value: "40_46", label: "40-46" },
+        { value: "47_54", label: "47-54" },
+        { value: "55_64", label: "55-64" },
+        { value: "65_plus", label: "65+" }
+      ],
+      whyWeAsk: "Age affects skin's natural processes, collagen production, and repair mechanisms. This helps us tailor anti-aging ingredients and concentrations."
+    },
+    {
+      category: "Lifestyle",
+      question: "What is your gender?",
+      type: "single",
+      key: "gender",
+      options: [
+        { value: "female", label: "Female" },
+        { value: "male", label: "Male" },
+        { value: "non_binary", label: "Non-binary" },
+        { value: "prefer_not", label: "I'd rather not say" }
+      ],
+      whyWeAsk: "Gender influences hormonal fluctuations that affect sebum production, skin thickness, and acne patterns. This helps us tailor ingredient strengths and target hormone-related skin concerns.",
+      highlight: "ingredient strengths",
+      research: ["Universität Hamburg", "UNIVERSITY OF TORONTO", "UBC"]
+    },
+    {
+      category: "Lifestyle",
+      question: "How many glasses of water do you drink per day?",
+      type: "single",
+      key: "waterIntake",
+      options: [
+        { value: "2_less", label: "2 or less" },
+        { value: "3_4", label: "3 - 4" },
+        { value: "5_6", label: "5 - 6" },
+        { value: "7_8", label: "7 - 8" },
+        { value: "9_more", label: "9 or more" }
+      ],
+      whyWeAsk: "Research shows that daily water intake correlates with skin hydration levels and barrier function. Proper hydration improves skin elasticity by 10-15% and reduces signs of dehydration."
+    },
+    {
+      category: "Lifestyle",
+      question: "On average, how many hours of sleep do you get per night?",
+      type: "single",
+      key: "sleep",
+      options: [
+        { value: "4_less", label: "4 or less" },
+        { value: "5_6", label: "5 - 6" },
+        { value: "7_8", label: "7 - 8" },
+        { value: "9_10", label: "9 - 10" },
+        { value: "11_more", label: "11 or more" }
+      ],
+      whyWeAsk: "Research shows that poor sleep quality reduces skin barrier recovery by 30% and increases signs of aging. Sleep-deprived skin shows elevated inflammatory markers."
+    },
+    {
+      category: "Lifestyle",
+      question: "How stressed are you?",
+      type: "single",
+      key: "stress",
+      options: [
+        { value: "not_stressed", label: "Not stressed" },
+        { value: "mildly", label: "Mildly stressed" },
+        { value: "moderately", label: "Moderately stressed" },
+        { value: "very", label: "Very stressed" },
+        { value: "extremely", label: "Extremely stressed" }
+      ],
+      whyWeAsk: "Stress directly impacts skin through various pathways including hormonal changes, immune function, and inflammatory responses. Chronic stress can worsen existing skin conditions and delay healing processes."
+    },
+    {
+      category: "Lifestyle",
+      question: "Which of the following items do you consume almost every day?",
+      type: "multiple",
+      key: "diet",
+      hint: "90% of users choose 3 or more",
+      options: [
+        { value: "veggies_fruits", label: "Veggies and Fruits" },
+        { value: "sugars", label: "Sugars or refined carbs" },
+        { value: "processed_meats", label: "Processed meats" },
+        { value: "dairy", label: "Dairy" },
+        { value: "alcohol", label: "Alcohol" },
+        { value: "vitamins", label: "Vitamins and supplements" }
+      ],
+      whyWeAsk: "Diet affects skin health through inflammation, oxidative stress, and nutrient availability. This helps us adjust ingredient formulations to support your skin's needs.",
+      highlight: "adjust ingredient"
+    },
+    {
+      category: "Lifestyle",
+      question: "How often do you travel on a plane?",
+      type: "single",
+      key: "travel",
+      options: [
+        { value: "not_at_all", label: "Not at all" },
+        { value: "couple_times", label: "A couple of times a year" },
+        { value: "quarterly", label: "At least quarterly" },
+        { value: "monthly", label: "Every month" },
+        { value: "weekly", label: "Weekly or biweekly" }
+      ],
+      whyWeAsk: "Air travel exposes skin to low humidity, pressurized environments, and increased UV exposure at altitude. Frequent flyers benefit from intensive hydrating ingredients and stronger barrier protection.",
+      highlight: "intensive hydrating ingredients"
+    },
+    {
+      category: "Lifestyle",
+      question: "Daily hours of screen time (cell phone, computer, TV)?",
+      type: "single",
+      key: "screenTime",
+      options: [
+        { value: "0_3", label: "0-3 hours" },
+        { value: "4_6", label: "4-6 hours" },
+        { value: "7_9", label: "7-9 hours" },
+        { value: "10_12", label: "10-12 hours" },
+        { value: "awake", label: "When i'm awake" }
+      ],
+      whyWeAsk: "Blue light from screens generates reactive oxygen species that damage skin cells and accelerate aging. Extended screen time increases eye strain, affecting periorbital skin, and promotes inflammatory responses.",
+      highlight: "antioxidant"
+    },
+    {
+      category: "Lifestyle",
+      question: "Which of these products do you use almost every day?",
+      type: "multiple",
+      key: "currentProducts",
+      hint: "90% of users choose 3 or more",
+      options: [
+        { value: "cleanser", label: "Cleanser" },
+        { value: "day_moisturizer", label: "Day moisturizer" },
+        { value: "spf", label: "SPF" },
+        { value: "serum", label: "Serum/emulsion/booster" },
+        { value: "toner", label: "Toner" },
+        { value: "night_cream", label: "Night cream" },
+        { value: "eye_cream", label: "Eye cream" }
+      ],
+      whyWeAsk: "Understanding your current routine helps us identify gaps and ensure our recommendations complement your existing products."
+    },
+    {
+      category: "Lifestyle",
+      question: "Do you wear makeup?",
+      type: "single",
+      key: "makeup",
+      options: [
+        { value: "yes", label: "Yes" },
+        { value: "no", label: "No" }
+      ],
+      whyWeAsk: "Makeup can affect skin barrier function and requires specific cleansing approaches. This helps us recommend appropriate cleansers and removal methods."
+    },
+    {
+      category: "Lifestyle",
+      question: "How do you shave?",
+      type: "single",
+      key: "shaving",
+      options: [
+        { value: "wet_shave", label: "Wet shave" },
+        { value: "electric", label: "Electric razor" },
+        { value: "dont_shave", label: "Don't shave" }
+      ],
+      whyWeAsk: "Shaving methods affect skin barrier integrity and irritation levels. This determines our need for soothing ingredients and post-shave barrier repair formulations.",
+      highlight: "post-shave barrier repair",
+      research: ["DALHOUSIE UNIVERSITY", "Durham University"]
+    },
+    {
+      category: "Lifestyle",
+      question: "Do you get ingrown hairs after shaving?",
+      type: "single",
+      key: "ingrownHairs",
+      options: [
+        { value: "yes", label: "Yes" },
+        { value: "no", label: "No" }
+      ],
+      whyWeAsk: "Ingrown hairs indicate follicular inflammation and dead skin buildup. This requires exfoliating and anti-inflammatory ingredients like salicylic acid.",
+      highlight: "prevents ingredient conflicts"
+    },
+    // Environment Category
+    {
+      category: "Environment",
+      question: "Your climate?",
+      type: "text",
+      key: "zipCode",
+      placeholder: "Enter zip/postal code",
+      whyWeAsk: "Your location determines environmental factors like humidity, pollution levels, UV intensity, water hardness, and seasonal changes that directly impact skin needs."
+    },
+    {
+      category: "Environment",
+      question: "How much time do you spend under direct sun exposure per day?",
+      type: "single",
+      key: "sunExposure",
+      options: [
+        { value: "none", label: "None" },
+        { value: "1_less", label: "1 or less" },
+        { value: "2_3", label: "2-3 hours" },
+        { value: "4_6", label: "4-6 hours" },
+        { value: "7_more", label: "7 or more" }
+      ],
+      whyWeAsk: "Sun exposure affects UV damage, melanoma risk, and the need for antioxidant protection. Your sun habits determine optimal SPF recommendations and anti-aging strategies.",
+      highlight: "optimal SPF recommendations"
+    },
+    {
+      category: "Environment",
+      question: "Would you like your day moisturizer to include SPF protection?",
+      type: "single",
+      key: "spfInMoisturizer",
+      options: [
+        { value: "yes", label: "Yes" },
+        { value: "no", label: "No" }
+      ],
+      whyWeAsk: "SPF in moisturizer provides convenience and ensures daily protection against UV damage. This helps us formulate products that match your preferences.",
+      highlight: "against UV damage",
+      research: ["UNIVERSITY OF OSLO", "THE UNIVERSITY OF QUEENSLAND AUSTRALIA"]
+    },
+    {
+      category: "Environment",
+      question: "Preferences",
+      type: "multiple",
+      key: "preferences",
+      hint: "Choose what matters to you",
+      options: [
+        { value: "fragrance_free", label: "Fragrance-free" },
+        { value: "vegan", label: "Vegan" },
+        { value: "refill", label: "Refill packaging" },
+        { value: "cruelty_free", label: "Cruelty-free" },
+        { value: "minimal_packaging", label: "Minimal packaging" }
+      ],
+      whyWeAsk: "Your preferences help us make responsible choices that align with your values."
+    }
+  ];
+
+  // Ingredients to display
+  const ingredients = [
+    { name: "Sea Kelp Bioferment", icon: "🌿" },
+    { name: "Ceramides", icon: "💧" },
+    { name: "Marula Oil", icon: "🫒" },
+    { name: "Willowbark Extract", icon: "🌳" },
+    { name: "Caffeine", icon: "☕" },
+    { name: "Niacinamide", icon: "✨" }
+  ];
+
+  // State Management
+  const state = {
+    currentStep: 0,
+    answers: {},
+    savedAt: null
+  };
+
+  const $ = (sel) => document.querySelector(sel);
+  const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+  // Initialize Quiz
+  function initQuiz(){
+    renderQuestion();
+    renderIngredients();
+    updateProgress();
+    updateNavigation();
+  }
+
+  // Render Current Question
+  function renderQuestion(){
+    const question = quizQuestions[state.currentStep];
+    const container = $("#quizQuestionContainer");
+    
+    let html = `<h2 class="quiz-question">${question.question}</h2>`;
+    
+    if(question.hint){
+      html += `<p class="quiz-hint">${question.hint}</p>`;
+    }
+
+    if(question.type === "text"){
+      const value = state.answers[question.key] || "";
+      html += `
+        <input type="text" 
+               id="quizInput" 
+               placeholder="${question.placeholder || ''}" 
+               value="${value}"
+               autocomplete="off" />
+      `;
+    } else if(question.type === "single"){
+      html += `<div class="quiz-options">`;
+      question.options.forEach(opt => {
+        const selected = state.answers[question.key] === opt.value ? "selected" : "";
+        html += `
+          <button class="quiz-option ${selected}" 
+                  data-value="${opt.value}"
+                  onclick="selectOption('${opt.value}')">
+            ${opt.label}
+          </button>
+        `;
+      });
+      html += `</div>`;
+    } else if(question.type === "multiple"){
+      html += `<div class="quiz-options">`;
+      const selectedValues = state.answers[question.key] || [];
+      question.options.forEach(opt => {
+        const selected = selectedValues.includes(opt.value) ? "selected" : "";
+        html += `
+          <button class="quiz-option ${selected}" 
+                  data-value="${opt.value}"
+                  onclick="toggleOption('${opt.value}')">
+            ${opt.label}
+          </button>
+        `;
+      });
+      html += `</div>`;
+    }
+
+    if(question.whyWeAsk){
+      let whyText = question.whyWeAsk;
+      if(question.highlight){
+        whyText = whyText.replace(
+          new RegExp(`(${question.highlight})`, 'gi'),
+          '<span class="highlight">$1</span>'
+        );
+      }
+      
+      html += `
+        <div class="why-we-ask">
+          <h3>WHY WE ASK:</h3>
+          <p>${whyText}</p>
+      `;
+      
+      if(question.research){
+        html += `
+          <div class="research-sources">
+            <strong>Based on research from:</strong>
+            <div class="research-logos">
+              ${question.research.map(r => `<div class="research-logo">${r}</div>`).join('')}
+            </div>
+          </div>
+        `;
+      }
+      
+      html += `</div>`;
+    }
+
+    container.innerHTML = html;
+
+    // Add input listener for text questions
+    if(question.type === "text"){
+      const input = $("#quizInput");
+      if(input){
+        input.addEventListener("input", (e) => {
+          state.answers[question.key] = e.target.value;
+          saveProgress();
+          updateNavigation();
+        });
+      }
+    }
+  }
+
+  // Select Single Option
+  window.selectOption = function(value){
+    const question = quizQuestions[state.currentStep];
+    state.answers[question.key] = value;
+    renderQuestion();
+    updateNavigation();
+    saveProgress();
+  };
+
+  // Toggle Multiple Options
+  window.toggleOption = function(value){
+    const question = quizQuestions[state.currentStep];
+    if(!state.answers[question.key]){
+      state.answers[question.key] = [];
+    }
+    const index = state.answers[question.key].indexOf(value);
+    if(index > -1){
+      state.answers[question.key].splice(index, 1);
+    } else {
+      state.answers[question.key].push(value);
+    }
+    renderQuestion();
+    saveProgress();
+  };
+
+  // Render Ingredients Sidebar
+  function renderIngredients(){
+    const container = $("#ingredientsList");
+    container.innerHTML = ingredients.map(ing => `
+      <div class="ingredient-item">
+        <div class="ingredient-icon">${ing.icon}</div>
+        <div class="ingredient-name">${ing.name}</div>
+      </div>
+    `).join('');
+  }
+
+  // Update Progress Indicator
+  function updateProgress(){
+    const question = quizQuestions[state.currentStep];
+    const categoryEl = $("#progressCategory");
+    categoryEl.textContent = question.category;
+
+    // Calculate progress dots
+    const totalSteps = quizQuestions.length;
+    const currentStepNum = state.currentStep + 1;
+    const dots = Math.ceil(totalSteps / 3); // Show ~3 dots per category
+    
+    const dotsContainer = $("#progressDots");
+    dotsContainer.innerHTML = '';
+    for(let i = 0; i < dots; i++){
+      const dot = document.createElement("div");
+      dot.className = "progress-dot";
+      if(i < Math.floor((currentStepNum / totalSteps) * dots)){
+        dot.classList.add("active");
+      }
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  // Update Navigation Buttons
+  function updateNavigation(){
+    const prevBtn = $("#prevBtn");
+    const nextBtn = $("#nextBtn");
+    
+    prevBtn.disabled = state.currentStep === 0;
+    
+    const question = quizQuestions[state.currentStep];
+    let canProceed = false;
+    
+    if(question.type === "text"){
+      canProceed = !!(state.answers[question.key] && state.answers[question.key].trim());
+    } else if(question.type === "single"){
+      canProceed = !!state.answers[question.key];
+    } else if(question.type === "multiple"){
+      canProceed = !!(state.answers[question.key] && state.answers[question.key].length > 0);
+    }
+    
+    nextBtn.disabled = !canProceed;
+    
+    if(state.currentStep === quizQuestions.length - 1){
+      nextBtn.textContent = "See My Routine";
+    } else {
+      nextBtn.textContent = "Next";
+    }
+  }
+
+  // Navigation Functions
+  $("#prevBtn").addEventListener("click", () => {
+    if(state.currentStep > 0){
+      state.currentStep--;
+      initQuiz();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+
+  $("#nextBtn").addEventListener("click", () => {
+    if(state.currentStep < quizQuestions.length - 1){
+      state.currentStep++;
+      initQuiz();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      completeQuiz();
+    }
+  });
+
+  // Complete Quiz
+  function completeQuiz(){
+    // Calculate Fit Score
+    const fitScore = calculateFitScore();
+    
+    // Show results
+    showResults(fitScore);
+  }
+
+  // Calculate Fit Score
+  function calculateFitScore(){
+    let score = 0;
+    let factors = 0;
+    
+    // Completeness (answered questions)
+    const answered = Object.keys(state.answers).length;
+    const total = quizQuestions.length;
+    const completeness = (answered / total) * 100;
+    score += completeness * 0.3;
+    factors++;
+    
+    // Sensitivity level
+    if(state.answers.sensitivityLevel || state.answers.skinType){
+      score += 20;
+      factors++;
+    }
+    
+    // Climate
+    if(state.answers.zipCode){
+      score += 20;
+      factors++;
+    }
+    
+    // Detail level (age, concerns, etc.)
+    if(state.answers.age && state.answers.concerns){
+      score += 30;
+      factors++;
+    }
+    
+    return Math.min(Math.round(score), 100);
+  }
+
+  // Show Results
+  function showResults(fitScore){
+    const container = $("#quizQuestionContainer");
+    const nav = $(".quiz-navigation");
+    nav.style.display = "none";
+    
+    container.innerHTML = `
+      <div class="results-container" style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
+        <!-- Supportive Message -->
+        <div class="results-header" style="text-align: center; margin-bottom: 48px;">
+          <h2 class="results-title" style="font-size: clamp(28px, 5vw, 36px); font-weight: 700; margin-bottom: 16px; color: var(--text);">
+            Your routine is ready
+          </h2>
+          <p class="results-subtitle" style="font-size: clamp(16px, 2.5vw, 18px); color: var(--text-light); line-height: 1.6; padding: 0 10px;">
+            We've created a gentle, balanced routine tailored to your skin. 
+            <strong>You can trust this.</strong> Every step is explained, every ingredient chosen with care.
+          </p>
+        </div>
+
+        <!-- Fit Score -->
+        <div class="fit-score-card" style="background: var(--pastel-purple); padding: clamp(24px, 4vw, 32px); border-radius: var(--radius-lg); margin-bottom: 40px; text-align: center;">
+          <div style="font-size: clamp(12px, 2vw, 14px); color: var(--text-light); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">
+            Fit Score
+          </div>
+          <div style="font-size: clamp(48px, 10vw, 64px); font-weight: 700; color: var(--accent-primary); margin-bottom: 12px;">
+            ${fitScore}%
+          </div>
+          <p style="font-size: clamp(12px, 2vw, 14px); color: var(--text-light); line-height: 1.6; padding: 0 10px;">
+            Based on completeness + sensitivity + climate + detail level
+          </p>
+        </div>
+
+        <!-- AM Routine -->
+        <div class="routine-section" style="margin-bottom: 40px;">
+          <h3 class="routine-title" style="font-size: clamp(20px, 4vw, 24px); font-weight: 600; margin-bottom: 24px; color: var(--text);">Morning Routine</h3>
+          <div class="routine-card" style="background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: clamp(20px, 3vw, 24px);">
+            <div class="routine-item" style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+              <div style="font-size: clamp(24px, 5vw, 32px); flex-shrink: 0;">🧴</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-weight: 600; margin-bottom: 4px; font-size: clamp(14px, 2.5vw, 16px);">Gentle Cleanser</div>
+                <div style="font-size: clamp(12px, 2vw, 14px); color: var(--text-light);">Barrier-friendly, balanced</div>
+              </div>
+            </div>
+            <div class="routine-item" style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+              <div style="font-size: clamp(24px, 5vw, 32px); flex-shrink: 0;">💧</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-weight: 600; margin-bottom: 4px; font-size: clamp(14px, 2.5vw, 16px);">Balancing Serum</div>
+                <div style="font-size: clamp(12px, 2vw, 14px); color: var(--text-light);">Evidence-led actives for your goal</div>
+              </div>
+            </div>
+            <div class="routine-item" style="display: flex; align-items: center; gap: 16px;">
+              <div style="font-size: clamp(24px, 5vw, 32px); flex-shrink: 0;">☀️</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-weight: 600; margin-bottom: 4px; font-size: clamp(14px, 2.5vw, 16px);">Daily Protection SPF</div>
+                <div style="font-size: clamp(12px, 2vw, 14px); color: var(--text-light);">Climate-adjusted, responsible</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PM Routine -->
+        <div class="routine-section" style="margin-bottom: 40px;">
+          <h3 class="routine-title" style="font-size: clamp(20px, 4vw, 24px); font-weight: 600; margin-bottom: 24px; color: var(--text);">Evening Routine</h3>
+          <div class="routine-card" style="background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: clamp(20px, 3vw, 24px);">
+            <div class="routine-item" style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+              <div style="font-size: clamp(24px, 5vw, 32px); flex-shrink: 0;">🧴</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-weight: 600; margin-bottom: 4px; font-size: clamp(14px, 2.5vw, 16px);">Gentle Cleanser</div>
+                <div style="font-size: clamp(12px, 2vw, 14px); color: var(--text-light);">Calm, comfortable cleansing</div>
+              </div>
+            </div>
+            <div class="routine-item" style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+              <div style="font-size: clamp(24px, 5vw, 32px); flex-shrink: 0;">💧</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-weight: 600; margin-bottom: 4px; font-size: clamp(14px, 2.5vw, 16px);">Balancing Serum</div>
+                <div style="font-size: clamp(12px, 2vw, 14px); color: var(--text-light);">Targeted support for your skin</div>
+              </div>
+            </div>
+            <div class="routine-item" style="display: flex; align-items: center; gap: 16px;">
+              <div style="font-size: clamp(24px, 5vw, 32px); flex-shrink: 0;">🧴</div>
+              <div style="flex: 1; min-width: 0;">
+                <div style="font-weight: 600; margin-bottom: 4px; font-size: clamp(14px, 2.5vw, 16px);">Barrier Support Moisturizer</div>
+                <div style="font-size: clamp(12px, 2vw, 14px); color: var(--text-light);">Comfort and relief overnight</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Why This Works -->
+        <div class="why-works-section" style="background: var(--bg); padding: clamp(24px, 4vw, 32px); border-radius: var(--radius-lg); margin-bottom: 40px;">
+          <h3 style="font-size: clamp(20px, 4vw, 24px); font-weight: 600; margin-bottom: 24px; color: var(--text);">Why This Works</h3>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="padding: 12px 0; border-bottom: 1px solid var(--border); font-size: clamp(14px, 2.5vw, 16px); line-height: 1.6; color: var(--text);">
+              • Balanced cleansing + barrier support based on skin type & climate
+            </li>
+            <li style="padding: 12px 0; border-bottom: 1px solid var(--border); font-size: clamp(14px, 2.5vw, 16px); line-height: 1.6; color: var(--text);">
+              • Actives chosen for your main goal
+            </li>
+            <li style="padding: 12px 0; font-size: clamp(14px, 2.5vw, 16px); line-height: 1.6; color: var(--text);">
+              • Frequency adjusted for sensitivity
+            </li>
+          </ul>
+        </div>
+
+        <!-- CTA -->
+        <div style="text-align: center;">
+          <a href="index.html#shop" class="quiz-nav-btn next" style="display: inline-block; text-decoration: none; width: 100%; max-width: 300px;">
+            View Your Products
+          </a>
+        </div>
+      </div>
+    `;
+    
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  // Save Progress
+  // Using sessionStorage instead of localStorage so data resets on each new session
+  // This ensures fresh analysis each time user visits the site (new browser tab/window)
+  function saveProgress(){
+    state.savedAt = new Date().toISOString();
+    sessionStorage.setItem("allure_quiz_state", JSON.stringify({
+      currentStep: state.currentStep,
+      answers: state.answers,
+      savedAt: state.savedAt
+    }));
+  }
+
+  // Load Progress
+  function loadProgress(){
+    const saved = sessionStorage.getItem("allure_quiz_state");
+    if(saved){
+      try{
+        const data = JSON.parse(saved);
+        state.currentStep = data.currentStep || 0;
+        state.answers = data.answers || {};
+        state.savedAt = data.savedAt;
+        return true;
+      } catch(e){
+        console.error("Error loading progress:", e);
+      }
+    }
+    return false;
+  }
+
+  // Initialize
+  if(loadProgress()){
+    // User has saved progress, continue from where they left off
+  }
+  
+  initQuiz();
+</script>
+
+  <!-- Disclaimer Footer -->
+  <footer style="background: var(--bg); padding: clamp(24px, 5vw, 40px) clamp(20px, 4vw, 32px); text-align: center; border-top: 1px solid var(--border); margin-top: 60px;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <p style="font-size: clamp(13px, 2vw, 14px); color: var(--text-light); line-height: 1.6; margin-bottom: 12px; padding: 0 10px;">
+        <strong>ALLURE provides educational suggestions, not medical diagnosis.</strong>
+      </p>
+      <p style="font-size: clamp(12px, 1.8vw, 13px); color: var(--text-light); line-height: 1.6; padding: 0 10px;">
+        If you have persistent irritation, acne, or other skin concerns, please consult a dermatologist.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
